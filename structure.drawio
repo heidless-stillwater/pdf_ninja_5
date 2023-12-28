@@ -1,0 +1,64 @@
+<mxfile host="Electron" modified="2023-12-27T07:23:31.036Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.2 Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36" etag="9C44oA66EWFS7z6mfMgc" version="22.1.2" type="device">
+  <diagram name="Page-1" id="vTTBgov0P_aUUP4vVlkY">
+    <mxGraphModel dx="2330" dy="877" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-1" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;self.app_mgr_container = ttk.Frame(&lt;br&gt;    &lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;,&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-2" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;br&gt;&lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;.pn_top_bar = ttk.Frame(&lt;br&gt;    &lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;,&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-3" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;br&gt;self.top_bar_lbl = ttk.Label(&lt;br&gt;    &lt;span style=&quot;color:#aa4926;&quot;&gt;master&lt;/span&gt;=&lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;.pn_top_bar,&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-4" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;br&gt;self.dashboard_operations = ttk.Frame(&lt;br&gt;    &lt;span style=&quot;color:#aa4926;&quot;&gt;master&lt;/span&gt;=&lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;.pn_top_bar,&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="410" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-5" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;br&gt;button_0 = ttk.Button(&lt;br&gt;    &lt;span style=&quot;color:#aa4926;&quot;&gt;master&lt;/span&gt;=&lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;.pn_top_bar,&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="500" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-6" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;br&gt;button_1 = ttk.Button(&lt;br&gt;    master=&lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;.pn_top_bar,&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="600" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-7" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;br&gt;button_2 = ttk.Button(&lt;br&gt;    master=&lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;.pn_top_bar,&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="690" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-9" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;br&gt;button_3 = ttk.Button(&lt;br&gt;    &lt;span style=&quot;color:#aa4926;&quot;&gt;master&lt;/span&gt;=&lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;.pn_top_bar,&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="780" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-10" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;br&gt;button_4 = ttk.Button(&lt;br&gt;    master=&lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;.pn_top_bar,&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="870" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-11" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;br&gt;button_5 = ttk.Button(&lt;br&gt;    master=&lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;.pn_top_bar,&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="960" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-12" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;app = ttk.Window(&#39;PDF Ninja&#39;, &lt;span style=&quot;color:#6aab73;&quot;&gt;&#39;superhero&#39;&lt;/span&gt;)&lt;br&gt;&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry y="20" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-13" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;br&gt;self.branding_container = ttk.Frame(&lt;br&gt;    &lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;,&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="1060" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-14" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;br&gt;self.logo_widget = ttk.Label(&lt;br&gt;  &lt;span style=&quot;color:#aa4926;&quot;&gt;master&lt;/span&gt;=&lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;.branding_container,&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="1160" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-15" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;br&gt;self.app_mgr_controls = ttk.Frame(&lt;br&gt;    &lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;,&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="1270" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-16" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;div&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;self.button_container = ttk.Frame(&lt;br&gt;    &lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;.app_mgr_controls,&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="1370" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-17" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;div&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;&lt;br&gt;cancel_btn = ttk.Button(&lt;br&gt;    master=&lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;.button_container,&lt;br&gt;    &lt;span style=&quot;color:#aa4926;&quot;&gt;text&lt;/span&gt;=&lt;span style=&quot;color:#6aab73;&quot;&gt;&#39;Cancel&#39;&lt;/span&gt;,&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="1470" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-18" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;cancel_btn_1 = ttk.Button(&lt;br&gt;    master=&lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;.button_container,&lt;br&gt;    &lt;span style=&quot;color:#aa4926;&quot;&gt;text&lt;/span&gt;=&lt;span style=&quot;color:#6aab73;&quot;&gt;&#39;Cancel 1&#39;&lt;/span&gt;,&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="1560" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="V8WxRYBZUp3DsYPOEEhZ-19" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:9.8pt;&quot;&gt;cancel_btn_2 = ttk.Button(&lt;br&gt;    master=&lt;span style=&quot;color:#94558d;&quot;&gt;self&lt;/span&gt;.button_container,&lt;br&gt;    &lt;span style=&quot;color:#aa4926;&quot;&gt;text&lt;/span&gt;=&lt;span style=&quot;color:#6aab73;&quot;&gt;&#39;Cancel 2&#39;&lt;/span&gt;,&lt;br&gt;&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="1650" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
