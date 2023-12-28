@@ -1383,7 +1383,6 @@ class PdfApp(Page):
 
         #TODO enforce as least one selection
 
-
         # for each of selection
             # split into pages & save to pdf_pages directory
 
