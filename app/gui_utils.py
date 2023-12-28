@@ -184,6 +184,7 @@ class PdfNinja(ttk.Frame):
         )
         self.nj_dashboard_header.grid(row=0, column=0, rowspan=1, columnspan=1, padx=(5, 5), pady=(5, 5), sticky='')
 
+
         self.nj_dashboard_header_lbl = ttk.Label(
             master=self.nj_dashboard_header,
             text='DashBoard - master',
