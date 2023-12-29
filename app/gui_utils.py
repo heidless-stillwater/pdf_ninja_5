@@ -4,8 +4,6 @@ from ttkbootstrap.toast import ToastNotification
 from ttkbootstrap.tableview import Tableview
 from ttkbootstrap.scrolled import ScrolledFrame
 
-
-
 from PIL import Image, ImageTk
 from icecream import ic
 import os
@@ -36,7 +34,7 @@ class PdfNinja(ttk.Frame):
             master_window,
             width=500,
             height=500,
-            style=WARNING,
+            # style=WARNING,
         )
         self.app_mgr_container.grid(row=0, column=0, rowspan=1, padx=(20, 20), pady=(20, 20), sticky='nsew')
 
@@ -46,10 +44,9 @@ class PdfNinja(ttk.Frame):
 
         self.app_mgr_create()
 
-        self.nj_dashboard_create()
+        # self.nj_dashboard_create()
 
-        # self.nj_support_create()
-        # self.nj_support_top_bar()
+        self.nj_support_create()
 
         # table
         # colors =
@@ -60,7 +57,7 @@ class PdfNinja(ttk.Frame):
             master=self.app_mgr_container,
             width=500,
             height=500,
-            style=INFO,
+            # style=INFO,
         )
         self.app_mgr_sidebar.grid(row=0, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='ne')
 
@@ -76,7 +73,7 @@ class PdfNinja(ttk.Frame):
             master=self.app_mgr_sidebar,
             width=300,
             height=300,
-            style=SUCCESS,
+            # style=SUCCESS,
         )
         self.branding_container.grid(row=0, column=0, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -110,7 +107,7 @@ class PdfNinja(ttk.Frame):
             master=self.app_mgr_sidebar,
             # width=600,
             height=600,
-            style=PRIMARY,
+            # style=PRIMARY,
         )
         self.app_mgr_controls.grid(row=1, column=0, rowspan=1, padx=5, pady=5, sticky='')
 
@@ -126,7 +123,7 @@ class PdfNinja(ttk.Frame):
             self.app_mgr_controls,
             width=200,
             height=200,
-            style=INFO,
+            # style=INFO,
         )
         self.button_container.grid(row=0, column=0, rowspan=1, padx=(20, 20), pady=(20, 20), sticky='ew')
         self.button_container.columnconfigure(0, weight=1)
@@ -156,17 +153,229 @@ class PdfNinja(ttk.Frame):
             master=self.button_container,
             text='Cancel 2',
             command=self.app_mgr_on_cancel,
-            style=DANGER,
+            style=WARNING,
             width=6
         )
         cancel_btn_2.grid(row=2, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
+
+######################
+# SUPPORT
+    def nj_support_create(self):
+        self.nj_supp_0 = ttk.Frame(
+            self.app_mgr_container,
+            width=500,
+            height=500,
+            # style=SUCCESS
+        )
+        self.nj_supp_0.grid(row=0, column=1, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='')
+
+        self.nj_support_header()
+        self.nj_support_top_bar()
+        self.nj_support_main()
+        self.nj_support_bottom_bar()
+
+    def nj_support_header(self):
+        self.nj_support_header = ttk.Frame(
+            master=self.nj_supp_0,
+            width=200,
+            height=500,
+            # style=PRIMARY,
+        )
+        self.nj_support_header.grid(row=0, column=0, rowspan=1, columnspan=1, padx=(5, 5), pady=(5, 5), sticky='')
+
+        self.nj_support_header_lbl = ttk.Label(
+            master=self.nj_support_header,
+            text='Support - master',
+            # style=LIGHT,
+        )
+        self.nj_support_header_lbl.grid(row=0, column=0, rowspan=1, columnspan=1, padx=(5, 5), pady=(5, 5), sticky='')
+
+    def nj_support_top_bar(self):
+        self.pn_supp_top_bar = ttk.Frame(
+            master=self.nj_supp_0,
+            # width=500,
+            # height=10,
+            # style=DARK,
+        )
+        self.pn_supp_top_bar.grid(row=1, column=0, rowspan=1, columnspan=1, padx=(5, 5), pady=(5, 5), sticky='n')
+
+        self.pn_supp_top_bar.rowconfigure(0, weight=2)
+
+        self.pn_supp_top_bar.columnconfigure(0, weight=1)
+        self.pn_supp_top_bar.columnconfigure(1, weight=1)
+        self.pn_supp_top_bar.columnconfigure(2, weight=1)
+        self.pn_supp_top_bar.columnconfigure(3, weight=1)
+        self.pn_supp_top_bar.columnconfigure(4, weight=1)
+
+        self.support_operations = ttk.Frame(
+            master=self.pn_supp_top_bar,
+            # style=DARK
+        )
+        self.support_operations.grid(row=1, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
+
+        sup_button_0 = ttk.Button(
+            master=self.support_operations,
+            text='Refresh COMBO Infiles',
+            style=PRIMARY,
+            cursor='hand2',
+            command=lambda: self.dummy_func(),
+        )
+        sup_button_0.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky='')
+
+        sup_button_1 = ttk.Button(
+            master=self.support_operations,
+            text='Refresh Combo Images',
+            style=PRIMARY,
+            cursor='hand2',
+            command=lambda: self.dummy_func(),
+        )
+        sup_button_1.grid(row=1, column=1, padx=(5, 5), pady=(5, 5), sticky='')
+        #
+        # sup_button_2 = ttk.Button(
+        #     master=self.support_operations,
+        #     text='Generate Combo Infiles',
+        #     style=PRIMARY,
+        #     cursor='hand2',
+        #     command=lambda: self.dummy_func(),
+        # )
+        # sup_button_2.grid(row=1, column=2, padx=(5, 5), pady=(5, 5), sticky='')
+        #
+        # sup_button_3 = ttk.Button(
+        #     master=self.support_operations,
+        #     text='Generate Combo Pages',
+        #     style=PRIMARY,
+        #     cursor='hand2',
+        #     command=lambda: self.dummy_func(),
+        # )
+        # sup_button_3.grid(row=1, column=3, padx=(5, 5), pady=(5, 5), sticky='')
+        #
+        # sup_button_4 = ttk.Button(
+        #     master=self.support_operations,
+        #     text='Generate Combo Images',
+        #     style=PRIMARY,
+        #     cursor='hand2',
+        #     command=lambda: self.dummy_func(),
+        # )
+        # sup_button_4.grid(row=1, column=4, padx=(5, 5), pady=(5, 5), sticky='')
+        #
+        # sup_button_5 = ttk.Button(
+        #     master=self.support_operations,
+        #     text='Full Wash Cycle',
+        #     style=DANGER,
+        #     cursor='hand2',
+        #     command=lambda: self.dummy_func(),
+        # )
+        # sup_button_5.grid(row=1, column=5, padx=(5, 5), pady=(5, 5), sticky='')
+
+    def nj_support_main(self):
+        self.nj_support_main = ttk.Frame(
+            master=self.nj_supp_0,
+            # width=200,
+            # height=500,
+            style=DANGER,
+        )
+        self.nj_support_main.grid(row=2, column=0, rowspan=1, columnspan=1, padx=(10, 10), pady=(10, 10), sticky='')
+
+        self.nj_support_main.columnconfigure(0, weight=1)
+        self.nj_support_main.columnconfigure(1, weight=1)
+        self.nj_support_main.columnconfigure(2, weight=1)
+        self.nj_support_main.rowconfigure(0, weight=1)
+        self.nj_support_main.rowconfigure(1, weight=1)
+
+        SCROLLFRAME_WIDTH = 400
+        SCROLLFRAME_HEIGHT = 500
+
+        self.nj_support_scroll_pages = ScrolledFrame(
+            master=self.nj_support_main,
+            autohide=True,
+            width=SCROLLFRAME_WIDTH,
+            height=SCROLLFRAME_HEIGHT,
+            style=DARK,
+        )
+        self.nj_support_scroll_pages.grid(row=0, column=0, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='nsew')
+
+        self.nj_support_scroll_combo_pages = ScrolledFrame(
+            master=self.nj_support_main,
+            autohide=True,
+            width=SCROLLFRAME_WIDTH,
+            height=SCROLLFRAME_HEIGHT,
+            style=DARK,
+        )
+        self.nj_support_scroll_combo_pages.grid(row=0, column=1, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='nsew')
+
+        self.nj_support_scroll_combo_pages_images = ScrolledFrame(
+            master=self.nj_support_main,
+            autohide=True,
+            width=SCROLLFRAME_WIDTH,
+            height=SCROLLFRAME_HEIGHT,
+            style=DARK,
+        )
+        self.nj_support_scroll_combo_pages_images.grid(row=0, column=2, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='nsew')
+
+
+        #
+        # self.test_button = ttk.Button(
+        #     master=self.nj_dash_0,
+        #     style=WARNING
+        # )
+        # self.test_button.grid(row=1, column=1, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='nsew')
+
+    def nj_support_bottom_bar(self):
+        # pdf_ninja
+        self.pn_supp_bottom_bar = ttk.Frame(
+            master=self.nj_supp_0,
+            # width=500,
+            # height=10,
+            # style=SECONDARY,
+        )
+        self.pn_supp_bottom_bar.grid(row=3, column=0, rowspan=1, columnspan=2, padx=(10, 10), pady=(10, 10), sticky='')
+
+        self.pn_supp_bottom_bar.rowconfigure(0, weight=2)
+        self.pn_supp_bottom_bar.rowconfigure(1, weight=1)
+
+        self.pn_supp_bottom_bar.columnconfigure(0, weight=1)
+        self.pn_supp_bottom_bar.columnconfigure(1, weight=1)
+        self.pn_supp_bottom_bar.columnconfigure(2, weight=1)
+        self.pn_supp_bottom_bar.columnconfigure(3, weight=1)
+        self.pn_supp_bottom_bar.columnconfigure(4, weight=1)
+
+        supp_bottom_btn_0 = ttk.Button(
+            master=self.pn_supp_bottom_bar,
+            text='Gen COMBO Pages',
+            style=PRIMARY,
+            cursor='hand2',
+            command=lambda: self.dummy_func(),
+        )
+        supp_bottom_btn_0.grid(row=0, column=0, padx=(10, 5), pady=(5, 5), sticky='')
+
+        supp_bottom_btn_1 = ttk.Button(
+            master=self.pn_supp_bottom_bar,
+            text='Gen COMBO Pages',
+            style=PRIMARY,
+            cursor='hand2',
+            command=lambda: self.dummy_func(),
+        )
+        supp_bottom_btn_1.grid(row=0, column=1, padx=(10, 5), pady=(5, 5), sticky='')
+
+        supp_bottom_btn_2 = ttk.Button(
+            master=self.pn_supp_bottom_bar,
+            text='Refresh COMBO Pages Images',
+            style=PRIMARY,
+            cursor='hand2',
+            command=lambda: self.dummy_func(),
+        )
+        supp_bottom_btn_2.grid(row=0, column=2, padx=(10, 5), pady=(5, 5), sticky='')
+
+
+######################
+# DASHBOARD
 
     def nj_dashboard_create(self):
         self.nj_dash_0 = ttk.Frame(
             self.app_mgr_container,
             width=500,
             height=500,
-            style=SUCCESS
+            # style=SUCCESS
         )
         self.nj_dash_0.grid(row=0, column=1, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='')
 
@@ -180,15 +389,14 @@ class PdfNinja(ttk.Frame):
             master=self.nj_dash_0,
             width=200,
             height=500,
-            style=PRIMARY,
+            # style=PRIMARY,
         )
         self.nj_dashboard_header.grid(row=0, column=0, rowspan=1, columnspan=1, padx=(5, 5), pady=(5, 5), sticky='')
-
 
         self.nj_dashboard_header_lbl = ttk.Label(
             master=self.nj_dashboard_header,
             text='DashBoard - master',
-            style=INFO,
+            style=LIGHT,
         )
         self.nj_dashboard_header_lbl.grid(row=0, column=0, rowspan=1, columnspan=1, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -197,7 +405,7 @@ class PdfNinja(ttk.Frame):
             master=self.nj_dash_0,
             # width=500,
             # height=10,
-            style=DARK,
+            # style=DARK,
         )
         self.pn_top_bar.grid(row=1, column=0, rowspan=1, columnspan=1, padx=(5, 5), pady=(5, 5), sticky='n')
 
@@ -211,14 +419,14 @@ class PdfNinja(ttk.Frame):
 
         self.dashboard_operations = ttk.Frame(
             master=self.pn_top_bar,
-            style=DARK
+            # style=DARK
         )
         self.dashboard_operations.grid(row=1, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
 
         button_0 = ttk.Button(
             master=self.dashboard_operations,
             text='Load PDF File',
-            style=SUCCESS,
+            style=PRIMARY,
             cursor='hand2',
             command=lambda: self.dummy_func(),
         )
@@ -227,7 +435,7 @@ class PdfNinja(ttk.Frame):
         button_1 = ttk.Button(
             master=self.dashboard_operations,
             text='Generate PDF Pages',
-            style=SUCCESS,
+            style=PRIMARY,
             cursor='hand2',
             command=lambda: self.dummy_func(),
         )
@@ -236,7 +444,7 @@ class PdfNinja(ttk.Frame):
         button_2 = ttk.Button(
             master=self.dashboard_operations,
             text='Generate Combo Infiles',
-            style=SUCCESS,
+            style=PRIMARY,
             cursor='hand2',
             command=lambda: self.dummy_func(),
         )
@@ -245,7 +453,7 @@ class PdfNinja(ttk.Frame):
         button_3 = ttk.Button(
             master=self.dashboard_operations,
             text='Generate Combo Pages',
-            style=SUCCESS,
+            style=PRIMARY,
             cursor='hand2',
             command=lambda: self.dummy_func(),
         )
@@ -254,7 +462,7 @@ class PdfNinja(ttk.Frame):
         button_4 = ttk.Button(
             master=self.dashboard_operations,
             text='Generate Combo Images',
-            style=SUCCESS,
+            style=PRIMARY,
             cursor='hand2',
             command=lambda: self.dummy_func(),
         )
@@ -263,7 +471,7 @@ class PdfNinja(ttk.Frame):
         button_5 = ttk.Button(
             master=self.dashboard_operations,
             text='Full Wash Cycle',
-            style=SUCCESS,
+            style=DANGER,
             cursor='hand2',
             command=lambda: self.dummy_func(),
         )
@@ -274,7 +482,7 @@ class PdfNinja(ttk.Frame):
             master=self.nj_dash_0,
             # width=200,
             # height=500,
-            style=WARNING,
+            # style=WARNING,
         )
         self.nj_dashboard_main.grid(row=2, column=0, rowspan=1, columnspan=1, padx=(10, 10), pady=(10, 10), sticky='')
 
@@ -287,7 +495,7 @@ class PdfNinja(ttk.Frame):
             autohide=True,
             width=1000,
             height=400,
-            style=INFO,
+            style=DARK,
         )
         self.nj_dashboard_scroll_pages.grid(row=0, column=0, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='nsew')
 
@@ -304,7 +512,7 @@ class PdfNinja(ttk.Frame):
             master=self.nj_dash_0,
             # width=500,
             # height=10,
-            style=SECONDARY,
+            # style=SECONDARY,
         )
         self.pn_bottom_bar.grid(row=3, column=0, rowspan=1, columnspan=2, padx=(10, 10), pady=(10, 10), sticky='')
 
@@ -320,7 +528,7 @@ class PdfNinja(ttk.Frame):
         bottom_btn_0 = ttk.Button(
             master=self.pn_bottom_bar,
             text='Merge Final Pages',
-            style=SUCCESS,
+            style=PRIMARY,
             cursor='hand2',
             command=lambda: self.dummy_func(),
         )
@@ -329,7 +537,7 @@ class PdfNinja(ttk.Frame):
         bottom_btn_1 = ttk.Button(
             master=self.pn_bottom_bar,
             text='Build Combo',
-            style=SUCCESS,
+            style=PRIMARY,
             cursor='hand2',
             command=lambda: self.dummy_func(),
         )
@@ -344,73 +552,7 @@ class PdfNinja(ttk.Frame):
         )
         bottom_btn_2.grid(row=0, column=2, padx=(10, 5), pady=(5, 5), sticky='')
 
-    def nj_support_create(self):
-        self.nj_support_0 = ttk.Frame(
-            self.app_mgr_container,
-            style=INFO
-        )
-        self.nj_support_0.grid(row=0, column=0, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='')
-        self.nj_support_top_bar()
 
-    def nj_support_top_bar(self):
-        # pdf_ninja
-        self.support_top_bar = ttk.Frame(
-            self.nj_support_0,
-            # width=500,
-            # height=10,
-            style=SECONDARY,
-        )
-        self.support_top_bar.grid(row=0, column=1, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='')
-
-        self.support_top_bar.rowconfigure(0, weight=2)
-        self.support_top_bar.rowconfigure(1, weight=1)
-        self.support_top_bar.columnconfigure(0, weight=1)
-        self.support_top_bar.columnconfigure(1, weight=1)
-        #
-        # self.support_top_bar.columnconfigure(2, weight=1)
-        # self.support_top_bar.columnconfigure(3, weight=1)
-        # self.support_top_bar.columnconfigure(4, weight=1)
-
-        ic(self.support_top_bar)
-
-
-        self.support_top_bar_lbl = ttk.Label(
-            master=self.support_top_bar,
-            text='Support'
-        )
-        self.support_top_bar_lbl.grid(row=0, column=0, rowspan=1, columnspan=6, padx=(10, 10), pady=(5, 5), sticky='')
-
-        self.support_operations = ttk.Frame(
-            master=self.support_top_bar,
-            style=DARK
-        )
-        self.support_top_bar.rowconfigure(0, weight=2)
-        self.support_top_bar.rowconfigure(1, weight=1)
-        self.support_operations.columnconfigure(0, weight=1)
-        self.support_operations.columnconfigure(1, weight=1)
-        self.support_operations.columnconfigure(2, weight=1)
-        self.support_operations.columnconfigure(3, weight=1)
-        self.support_operations.columnconfigure(4, weight=1)
-        self.support_operations.grid(row=1, column=0, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='')
-
-
-        support_button_0 = ttk.Button(
-            master=self.support_operations,
-            text='Load PDF File',
-            style=SUCCESS,
-            cursor='hand2',
-            command=lambda: self.dummy_func(),
-        )
-        support_button_0.grid(row=0, column=0, padx=(5, 5), pady=(5, 5), sticky='')
-
-        support_button_1 = ttk.Button(
-            master=self.support_operations,
-            text='Operation',
-            style=INFO,
-            cursor='hand2',
-            command=lambda: self.dummy_func(),
-        )
-        support_button_1.grid(row=0, column=1, padx=(5, 5), pady=(5, 5), sticky='')
 
     # action when user clicks cancel
     def app_mgr_on_cancel(self):

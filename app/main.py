@@ -8,7 +8,7 @@ from PIL import Image, ImageTk
 if __name__ == '__main__':
     # app = ttk.Window('GradeBook', 'superhero', resizeable=(False, False))
 
-    app = ttk.Window('PDF Ninja', 'superhero')
+    app = ttk.Window('PDF Ninja', 'darkly')
     app.grid_columnconfigure(0, weight=1)
     app.grid_rowconfigure(0, weight=1)
 
