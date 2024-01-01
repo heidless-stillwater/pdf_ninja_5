@@ -59,6 +59,7 @@ logo_widget = ttkbootstrap.Label(
   # style='logo.TLabel',
 )
 logo_widget.image = logo_img
+
 img_padx, img_pady = logo_position()
 logo_widget.grid(row=2, column=0, padx=img_padx, pady=img_pady, sticky='e')
 

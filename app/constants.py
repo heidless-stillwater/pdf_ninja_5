@@ -2,6 +2,29 @@
 
 PDF_NINJA_LOGO = 'assets/RRecipe_logo.png'
 
+PDF_FILES = f'./pdf_files'
+
+PDF_INFILES = f'app/pdf_files/pdf_infiles'
+PAGES_DIR = f'app/pdf_files/pdf_pages'
+PDF_PAGES_DIR = f'app//pdf_files/pdf_pages'
+COMBO_INFILES_DIR = f'app/pdf_files/pdf_combo/combo_infiles'
+COMBO_PAGES_DIR = f'app/pdf_files/pdf_combo/combo_pages'
+COMBO_IMAGES_DIR = f'app/pdf_files/pdf_combo/combo_images'
+
+IMAGES_DIR = f'./pdf_files/pdf_images'
+COMBO_DIR = f'./pdf_files/pdf_combo'
+COMBO_SORT_DIR = f'{COMBO_DIR}/sort_files'
+
+COMBO_OUTPUT_DIR = f'{COMBO_DIR}/combo_output'
+COMBO_COMBO_DIR = f'{COMBO_DIR}/combo_images'
+
+COMBO_ICON_WIDTH = 160
+DASHBOARD_NUM_COLS = 6
+DASHBOARD_HEIGHT = 5
+
+DIR_IMG = 'assets/images/icons8-folder-48.png'
+LIST_IMG = 'assets/images/icons8-pdf-48.png'
+
 # PDF_NINJA_LOGO = 'C:\Users\heidless\PycharmProjects\pdf_ninja_5\assets-old\RRecipe_logo.png'
 
 #
