@@ -789,6 +789,7 @@ class PdfNinja(ttk.Frame):
 
         ic()
 
+
         # print(f'combo_infiles_listing:listing: {listing}')
         # self.display_listing(listing)
         return listing
