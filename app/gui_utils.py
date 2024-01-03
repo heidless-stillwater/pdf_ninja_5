@@ -441,6 +441,7 @@ class PdfNinja(ttk.Frame):
         )
         self.dashboard_operations.grid(row=1, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
 
+
         button_0 = ttk.Button(
             master=self.dashboard_operations,
             text='Load PDF File - TST',
