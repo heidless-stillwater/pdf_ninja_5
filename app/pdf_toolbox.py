@@ -59,7 +59,7 @@ class PdfToolbox:
 
         # ignore directories
         dir_contents = [f for f in os.listdir(COMBO_INFILES_DIR) if os.path.isfile(os.path.join(COMBO_INFILES_DIR, f))]
-        ic(dir_contents)
+        # ic(dir_contents)
 
         # print(f'combo_infiles_listing:dir_contents: {dir_contents}')
 
@@ -75,11 +75,15 @@ class PdfToolbox:
         # print(f'listing: {listing}')
         return listing
 
-    def list_pages_dir(self):
+    def list_pages_dir(self, combo_name):
+        ic(combo_name)
+
         # print(f'pdf_t:.list_pages_dir')
 
         # ignore directories
         dir_contents = [f for f in os.listdir(PAGES_DIR) if os.path.isfile(os.path.join(PAGES_DIR, f))]
+        ic(combo_name, dir_contents)
+
         # print(f'pdf_toolbox:list_pdf_dir:dir_contents: {dir_contents}')
 
         file_text = ''

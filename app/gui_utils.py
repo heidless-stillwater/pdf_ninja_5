@@ -9,12 +9,15 @@ from ttkbootstrap.scrolled import ScrolledText
 from tkinter import filedialog as fd
 
 from pdf_toolbox import PdfToolbox
+from get_combo_dialog import GetComboDialog
 
 import random
 from pdf2image import convert_from_path
 from PIL import Image, ImageTk
 from icecream import ic
 import os
+import os.path
+from os import path
 
 # pathlib
 # setuptools
@@ -29,6 +32,8 @@ class PdfNinja(ttk.Frame):
         # self.pack(fill=BOTH, expand=YES)
 
         self.pdf_t = PdfToolbox()
+
+        self.current_combo_name = ''
 
         # reveal app window
         self.grid(row=0, column=0)
@@ -438,7 +443,7 @@ class PdfNinja(ttk.Frame):
 
         button_0 = ttk.Button(
             master=self.dashboard_operations,
-            text='Load PDF File',
+            text='Load PDF File - TST',
             style=PRIMARY,
             cursor='hand2',
             command=lambda: self.load_pdf_file(),
@@ -569,7 +574,7 @@ class PdfNinja(ttk.Frame):
             height=50,
             style=WARNING,
         )
-        self.combo_filename_entry_frame.grid(row=0, column=1, padx=(5, 5), pady=(5, 0), sticky='N')
+        self.combo_filename_entry_frame.grid(row=0, column=1, rowspan=2, padx=(5, 5), pady=(5, 0), sticky='N')
 
         self.combo_filename_entry = ttk.Entry(
             master=self.combo_filename_entry_frame,
@@ -583,6 +588,14 @@ class PdfNinja(ttk.Frame):
             command=self.build_combo_all
         )
         self.button_merge_pages.grid(row=2, column=0, padx=(5, 5), pady=(5, 5))
+
+        self.bottom_lbl_0 = ttk.Label(
+            master=self.pn_bottom_bar,
+            text='Status Label: ',
+            style=LIGHT,
+            font='Helvetica, 12',
+        )
+        self.bottom_lbl_0.grid(row=1, column=2, columnspan=3, padx=(10, 5), pady=(5, 5), sticky='')
 
         bottom_btn_0 = ttk.Button(
             master=self.pn_bottom_bar,
@@ -604,12 +617,22 @@ class PdfNinja(ttk.Frame):
 
         bottom_btn_2 = ttk.Button(
             master=self.pn_bottom_bar,
-            text='Gen Doc Based on Selection',
+            text='POPUP: get combo name',
             style=DANGER,
             cursor='hand2',
-            command=lambda: self.dummy_func(),
+            command=lambda: self.open_get_combo_dialog(),
         )
         bottom_btn_2.grid(row=0, column=4, padx=(10, 5), pady=(5, 5), sticky='')
+
+    def open_get_combo_dialog(self):
+        getComboDialog = GetComboDialog(self.refresh_combo_name)
+
+    def refresh_combo_name(self, combo_name):
+        ic('update function from main window...')
+        self.current_combo_name = combo_name.get()
+        ic(self.current_combo_name)
+        self.bottom_lbl_0.configure(text=f'Current Combo: {self.current_combo_name}')
+
 
     ####################################
     # utiities
@@ -673,9 +696,9 @@ class PdfNinja(ttk.Frame):
         def get_combo_name():
             self.combo_name_lbl.config(text=f'You typed: {self.combo_name_entry.get()}')
             new_combo_name = self.combo_name_entry.get()
-            ic(new_combo_name)
+            # ic(new_combo_name)
             self.current_combo_name = new_combo_name
-            ic(self.current_combo_name)
+            # ic(self.current_combo_name)
             return new_combo_name
 
         # create entry widget
@@ -706,15 +729,17 @@ class PdfNinja(ttk.Frame):
         # form variables
         self.combo_name = ttk.StringVar(value="")
         self.current_combo_name = ''
+
         # create entry function
         #
         # rand_prefix = random.randint(1, 1000000)
         # outfile = f'{rand_prefix}.pdf'
 
         outfile = self.combo_filename_entry.get()
-        self.outfile_global = outfile
-        ic(f'outfile set: {outfile}')
+        # self.outfile_global = outfile
 
+        outfile_global = outfile
+        # ic(f'outfile set: {outfile}')
 
         if len(outfile) == 0:
             dummy = 0
@@ -723,13 +748,14 @@ class PdfNinja(ttk.Frame):
             # out_txt = 'No Entry'
             # self.textbox.insert("0.0", out_txt)
         else:
-            ic(outfile)
+            # ic(outfile)
             if len(outfile) == 0:
                 ic(f'No Pages Selected...')
             else:
-                selection = self.get_page_all_selected()
+                selection = self.get_page_all_selected(outfile_global)
                 # print(f'build_combo_all:selection: {selection}')
                 self.pdf_t.merge_files(selection, outfile)
+
                 # c_lst_frame = self.combo_listing_frame.grid_columnconfigure(0, weight=1)
                 # self.combo_refresh()
                 # FileMgr.combo_refresh(c_lst_frame)
@@ -737,8 +763,11 @@ class PdfNinja(ttk.Frame):
 
         # self.combo_refresh()
 
-    def get_page_all_selected(self):
-        pdf_pages_listing = self.pdf_t.list_pages_dir()
+    def get_page_all_selected(self, pattern):
+        ic('in get_page_all_selected')
+        pdf_pages_listing = self.pdf_t.list_pages_dir(pattern)
+        ic(pattern, pdf_pages_listing)
+
         # ic(f'{__name__} : {pdf_pages_listing}')
 
         selection = []
@@ -783,13 +812,11 @@ class PdfNinja(ttk.Frame):
 
     def combo_infiles_listing_PROTO(self):
         listing = self.pdf_t.combo_infiles_listing()
-        ic(listing)
+        # ic(listing)
 
-        ic(self.outfile_global)
+        # ic(self.outfile_global)
 
-        ic()
-
-
+        # print(f'combo_infiles_listing:listing: {listing}')
         # print(f'combo_infiles_listing:listing: {listing}')
         # self.display_listing(listing)
         return listing
@@ -825,7 +852,11 @@ class PdfNinja(ttk.Frame):
         row = 0
         col_index = 0
         combo_lst = self.get_combo_pages_images_listing()
-        ic(f'combo_pages_images_refresh: {combo_lst}')
+        # ic(f'combo_pages_images_refresh: {combo_lst}')
+
+        ##############################
+
+        ##############################
 
         self.combo_pages_images_listing_frame_switches = []
 
@@ -853,12 +884,12 @@ class PdfNinja(ttk.Frame):
 
             sz_w = COMBO_ICON_WIDTH
             sz_h = int(sz_w * 1.41)
-
             icon_img = Image.open(f'{COMBO_IMAGES_DIR}/{combo}').resize((sz_w, sz_h))
-            # photo_img = tk.PhotoImage(icon_img)
             img_path = f'{COMBO_IMAGES_DIR}/{combo}'
+            ic(img_path)
+            # skip if image already exists
+            # if img_path.exists():
 
-            # ic(img_path)
 
             icon_img = Image.open(img_path).resize((sz_w, sz_h))
             photo_img = ImageTk.PhotoImage(icon_img)
@@ -969,36 +1000,47 @@ class PdfNinja(ttk.Frame):
 
     def generate_combo_pages_images(self):
         c_lst = self.get_combo_pages_listing()
+        ic(f'c_lst: {c_lst}')
 
         # define out images
         folder_img = ImageTk.PhotoImage(Image.open(DIR_IMG).resize((35, 35)))
         list_image = ImageTk.PhotoImage(Image.open(LIST_IMG).resize((60, 60)))
         icon_lst = []
         # ic(c_lst)
+
         for in_file in c_lst:
-            # ic(in_file)
-            with open(in_file, 'wb') as in_img:
-                f_path = f'{COMBO_PAGES_DIR}/{in_file}'
-                # ic(f_path)
-                img = convert_from_path(f_path)
 
-                for i in range(len(img)):
-                    save_file = COMBO_IMAGES_DIR + '/' + in_file + '.png'
-                    # ic(save_file)
+            ic(in_file)
+            images_path = f'{COMBO_IMAGES_DIR}/{in_file}.png'
+            ic(images_path)
 
-                    img[i].save(save_file, 'PNG')
+            if path.exists(images_path):
+                ic(in_file, 'already exists', path.exists(images_path) )
+            else:
+                ic(in_file, 'path does NOT exists')
+
+                # ic(in_file)
+                with open(in_file, 'wb') as in_img:
+                    f_path = f'{COMBO_PAGES_DIR}/{in_file}'
+                    # ic(f_path)
+                    img = convert_from_path(f_path)
+
+                    for i in range(len(img)):
+                        save_file = COMBO_IMAGES_DIR + '/' + in_file + '.png'
+                        # ic(save_file)
+
+                        img[i].save(save_file, 'PNG')
 
         self.combo_pages_images_refresh()
 
-# 22222222222222222222222222222222222
     def gen_combo_pages_from_combo_pages(self):
         # converts ALL infiles
-        ic(f'gen_combo_pages_from_combo')
+        # ic(f'gen_combo_pages_from_combo')
         # get selection
         row = 0
 
         combo_infiles_lst_PROTO = self.combo_infiles_listing_PROTO()
-        ic(combo_infiles_lst_PROTO)
+        # ic(combo_infiles_lst_PROTO)
 
         # remove all not equal to outfile_global
 
@@ -1049,28 +1091,46 @@ class PdfNinja(ttk.Frame):
         # get entry value
         # load_pdf_file_name = f'{self.load_file_entry.get()}'
 
-        load_pdf_file = fd.askopenfilename()
-        # print(f'loading: {load_pdf_file}')
+        self.current_combo_name = fd.askopenfilename()
+        ic(self.current_combo_name, self.current_combo_name.split('/')[-1])
 
         # read input file'
         try:
-            with open(load_pdf_file, 'rb') as in_img:
+            # ic('opening', self.load_pdf_file )
+            with open(self.current_combo_name, 'rb') as in_img:
                 pdf_contents = in_img.read()
                 # print(f'pdf_contents: {pdf_contents}')
         except:
-            print(f'unable to open: {load_pdf_file}')
+            print(f'unable to open: {self.current_combo_name}')
+
+        # ic(pdf_contents)
 
         # write local infile
-        out_split = load_pdf_file.split('/')[-1]
+        out_split = self.current_combo_name.split('/')[-1]
+        # ic(out_split)
+
         # print(f'out_split: {out_split}')
 
         pdf_save_file = f'{PDF_INFILES}/{out_split}'
+        # ic(pdf_save_file)
+
+        combo_infilea = f'{COMBO_INFILES_DIR}/{out_split}'
+        # ic(combo_infilea)
+
         # print(f'pdf_save_file: {pdf_save_file}')
         try:
+            # ic(pdf_save_file)
             with open(pdf_save_file, 'wb') as save_file:
                 save_file.write(pdf_contents)
         except FileNotFoundError:
             print(f'unable to save file: {pdf_save_file}')
+
+        try:
+            # ic(combo_infilea)
+            with open(combo_infilea, 'wb') as save_file:
+                save_file.write(pdf_contents)
+        except FileNotFoundError:
+            print(f'unable to save file: {combo_infilea}')
 
         # self.refresh_pdf_infiles_listing()
 
@@ -1118,7 +1178,7 @@ class PdfNinja(ttk.Frame):
 
         # ic(selection)
 
-        #TODO enforce as least one selection
+        #TOD enforce as least one selection
 
         # for each of selection
             # split into pages & save to pdf_pages directory
