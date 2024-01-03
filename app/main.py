@@ -10,7 +10,7 @@ if __name__ == '__main__':
 
     app = ttk.Window('PDF Ninja', 'darkly')
 
-    app.geometry(f'+550+10')
+    app.geometry(f'1600x1000+300+10')
 
     app.grid_columnconfigure(0, weight=1)
     app.grid_rowconfigure(0, weight=1)

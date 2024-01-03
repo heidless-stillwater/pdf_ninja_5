@@ -48,8 +48,8 @@ class PdfNinja(ttk.Frame):
 
         self.app_mgr_container = ttk.Frame(
             master_window,
-            width=500,
-            height=500,
+            width=5000,
+            height=5000,
             # style=WARNING,
         )
         self.app_mgr_container.grid(row=0, column=0, rowspan=1, padx=(20, 20), pady=(20, 20), sticky='nsew')
@@ -60,39 +60,9 @@ class PdfNinja(ttk.Frame):
 
         self.app_mgr_create()
 
-        #############################
-        # dashboard test
-        #############################
-        # initializing frames to an empty array
-        self.frames = {}
+        self.nj_dashboard_create()
 
-        # iterating through a tuple consisting
-        # of the different page layouts
-        for F in (StartPage, Page1, Page2):
-            frame = F(self.app_mgr_container, self)
-
-            # initializing frame of that object from
-            # startpage, page1, page2 respectively with
-            # for loop
-            self.frames[F] = frame
-
-            frame.grid(row=0, column=0, sticky="nsew")
-
-        self.show_frame(StartPage)
-
-        #
-        # self.nj_dashboard_create()
-        #
-        # # self.nj_support_create()
-        #
-        # # table
-        # # colors =
-
-    # to display the current frame passed as
-    # parameter
-    def show_frame(self, cont):
-        frame = self.frames[cont]
-        frame.tkraise()
+        self.nj_support_create()
 
     def app_mgr_create(self):
         # ic('in app mgr create')
@@ -176,14 +146,23 @@ class PdfNinja(ttk.Frame):
 
         label = ttk.Label(self, text="Startpage", font=LARGEFONT)
 
-        page_1_button = ttk.Button(
+        switch_to_dashboard_btn = ttk.Button(
             master=self.button_container,
-            text='Cancel',
-            command=self.app_mgr_on_cancel,
-            style=DANGER,
-            width=6
+            text='->Dashboard',
+            command=self.page_switch_to_dashboard,
+            # style=DANGER,
+            width=15
         )
-        page_1_button.grid(row=0, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
+        switch_to_dashboard_btn.grid(row=0, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
+
+        switch_to_dashboard_btn = ttk.Button(
+            master=self.button_container,
+            text='->Support',
+            command=self.page_switch_to_support,
+            style=WARNING,
+            width=15
+        )
+        switch_to_dashboard_btn.grid(row=1, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
 
         cancel_btn = ttk.Button(
             master=self.button_container,
@@ -192,16 +171,7 @@ class PdfNinja(ttk.Frame):
             style=DANGER,
             width=6
         )
-        cancel_btn.grid(row=0, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
-
-        cancel_btn = ttk.Button(
-            master=self.button_container,
-            text='Cancel',
-            command=self.app_mgr_on_cancel,
-            style=DANGER,
-            width=6
-        )
-        cancel_btn.grid(row=0, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
+        cancel_btn.grid(row=2, column=0, rowspan=1, padx=(5, 5), pady=(30, 5), sticky='')
 
         cancel_btn_1 = ttk.Button(
             master=self.button_container,
@@ -210,7 +180,7 @@ class PdfNinja(ttk.Frame):
             style=SECONDARY,
             width=6
         )
-        cancel_btn_1.grid(row=1, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
+        cancel_btn_1.grid(row=3, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
 
         cancel_btn_2 = ttk.Button(
             master=self.button_container,
@@ -219,9 +189,20 @@ class PdfNinja(ttk.Frame):
             style=WARNING,
             width=6
         )
-        cancel_btn_2.grid(row=2, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
+        cancel_btn_2.grid(row=4, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
 
-######################
+    def page_switch_to_dashboard(self):
+        self.nj_supp_0.grid_forget()
+        self.nj_dash_0.grid(row=0, column=1, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='')
+        self.nj_dash_0.tkraise()
+
+    def page_switch_to_support(self):
+        ic('in page_switch_to_support')
+        self.nj_dash_0.grid_forget()
+        self.nj_supp_0.grid(row=0, column=1, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='')
+        self.nj_supp_0.tkraise()
+
+    ######################
 # SUPPORT
     def nj_support_create(self):
         self.nj_supp_0 = ttk.Frame(
@@ -236,8 +217,8 @@ class PdfNinja(ttk.Frame):
         self.nj_support_top_bar()
         self.nj_support_main()
         self.nj_support_bottom_bar()
-
-        ###########################
+        #
+        # ###########################
         # refresh listings
 
         # infiles
@@ -934,7 +915,7 @@ class PdfNinja(ttk.Frame):
             sz_h = int(sz_w * 1.41)
             icon_img = Image.open(f'{COMBO_IMAGES_DIR}/{combo}').resize((sz_w, sz_h))
             img_path = f'{COMBO_IMAGES_DIR}/{combo}'
-            ic(img_path)
+            # ic(img_path)
             # skip if image already exists
             # if img_path.exists():
 
