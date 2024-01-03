@@ -25,6 +25,9 @@ DASHBOARD_HEIGHT = 5
 DIR_IMG = 'assets/images/icons8-folder-48.png'
 LIST_IMG = 'assets/images/icons8-pdf-48.png'
 
+LARGEFONT = ("Verdana", 35)
+
+
 # PDF_NINJA_LOGO = 'C:\Users\heidless\PycharmProjects\pdf_ninja_5\assets-old\RRecipe_logo.png'
 
 #

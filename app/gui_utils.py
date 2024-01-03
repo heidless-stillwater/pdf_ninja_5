@@ -8,6 +8,7 @@ from ttkbootstrap.scrolled import ScrolledText
 
 from tkinter import filedialog as fd
 
+from dashboard import DashBoard
 from pdf_toolbox import PdfToolbox
 from get_combo_dialog import GetComboDialog
 
@@ -59,12 +60,39 @@ class PdfNinja(ttk.Frame):
 
         self.app_mgr_create()
 
-        self.nj_dashboard_create()
+        #############################
+        # dashboard test
+        #############################
+        # initializing frames to an empty array
+        self.frames = {}
 
-        # self.nj_support_create()
+        # iterating through a tuple consisting
+        # of the different page layouts
+        for F in (StartPage, Page1, Page2):
+            frame = F(self.app_mgr_container, self)
 
-        # table
-        # colors =
+            # initializing frame of that object from
+            # startpage, page1, page2 respectively with
+            # for loop
+            self.frames[F] = frame
+
+            frame.grid(row=0, column=0, sticky="nsew")
+
+        self.show_frame(StartPage)
+
+        #
+        # self.nj_dashboard_create()
+        #
+        # # self.nj_support_create()
+        #
+        # # table
+        # # colors =
+
+    # to display the current frame passed as
+    # parameter
+    def show_frame(self, cont):
+        frame = self.frames[cont]
+        frame.tkraise()
 
     def app_mgr_create(self):
         # ic('in app mgr create')
@@ -145,6 +173,26 @@ class PdfNinja(ttk.Frame):
         self.button_container.rowconfigure(0, weight=1)
         self.button_container.rowconfigure(1, weight=1)
         self.button_container.rowconfigure(2, weight=1)
+
+        label = ttk.Label(self, text="Startpage", font=LARGEFONT)
+
+        page_1_button = ttk.Button(
+            master=self.button_container,
+            text='Cancel',
+            command=self.app_mgr_on_cancel,
+            style=DANGER,
+            width=6
+        )
+        page_1_button.grid(row=0, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
+
+        cancel_btn = ttk.Button(
+            master=self.button_container,
+            text='Cancel',
+            command=self.app_mgr_on_cancel,
+            style=DANGER,
+            width=6
+        )
+        cancel_btn.grid(row=0, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
 
         cancel_btn = ttk.Button(
             master=self.button_container,
@@ -385,7 +433,7 @@ class PdfNinja(ttk.Frame):
 
     ######################
     # DASHBOARD
-    #
+    ######################
 
     def nj_dashboard_create(self):
         self.nj_dash_0 = ttk.Frame(
@@ -440,7 +488,6 @@ class PdfNinja(ttk.Frame):
             # style=DARK
         )
         self.dashboard_operations.grid(row=1, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
-
 
         button_0 = ttk.Button(
             master=self.dashboard_operations,
@@ -1217,6 +1264,82 @@ class PdfNinja(ttk.Frame):
     def dummy_func(self):
         ic('in dummy_func()')
 
+
+class StartPage(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        # label of frame Layout 2
+        label = ttk.Label(self, text="Startpage", font=LARGEFONT)
+
+        # putting the grid in its place by using
+        # grid
+        label.grid(row=0, column=4, padx=10, pady=10)
+
+        button1 = ttk.Button(self, text="Page 1",
+                             command=lambda: controller.show_frame(Page1))
+
+        # putting the button in its place by
+        # using grid
+        button1.grid(row=1, column=1, padx=10, pady=10)
+
+        ## button to show frame 2 with text layout2
+        button2 = ttk.Button(self, text="Page 2",
+                             command=lambda: controller.show_frame(Page2))
+
+        # putting the button in its place by
+        # using grid
+        button2.grid(row=2, column=1, padx=10, pady=10)
+
+# second window frame page1
+class Page1(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = ttk.Label(self, text="Page 1", font=LARGEFONT)
+        label.grid(row=0, column=4, padx=10, pady=10)
+
+        # button to show frame 2 with text
+        # layout2
+        button1 = ttk.Button(self, text="StartPage",
+                             command=lambda: controller.show_frame(StartPage))
+
+        # putting the button in its place
+        # by using grid
+        button1.grid(row=1, column=1, padx=10, pady=10)
+
+        # button to show frame 2 with text
+        # layout2
+        button2 = ttk.Button(self, text="Page 2",
+                             command=lambda: controller.show_frame(Page2))
+
+        # putting the button in its place by
+        # using grid
+        button2.grid(row=2, column=1, padx=10, pady=10)
+
+# third window frame page2
+class Page2(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = ttk.Label(self, text="Page 2", font=LARGEFONT)
+        label.grid(row=0, column=4, padx=10, pady=10)
+
+        # button to show frame 2 with text
+        # layout2
+        button1 = ttk.Button(self, text="Page 1",
+                             command=lambda: controller.show_frame(Page1))
+
+        # putting the button in its place by
+        # using grid
+        button1.grid(row=1, column=1, padx=10, pady=10)
+
+        # button to show frame 3 with text
+        # layout3
+        button2 = ttk.Button(self, text="Startpage",
+                             command=lambda: controller.show_frame(StartPage))
+
+        # putting the button in its place by
+        # using grid
+        button2.grid(row=2, column=1, padx=10, pady=10)
 
 
 
