@@ -76,13 +76,13 @@ class PdfToolbox:
         return listing
 
     def list_pages_dir(self, combo_name):
-        ic(combo_name)
-
+        # ic(combo_name)
+        #
         # print(f'pdf_t:.list_pages_dir')
 
         # ignore directories
         dir_contents = [f for f in os.listdir(PAGES_DIR) if os.path.isfile(os.path.join(PAGES_DIR, f))]
-        ic(combo_name, dir_contents)
+        # ic(combo_name, dir_contents)
 
         # print(f'pdf_toolbox:list_pdf_dir:dir_contents: {dir_contents}')
 
@@ -104,7 +104,7 @@ class PdfToolbox:
         # ignore directories
         dir_contents = [f for f in os.listdir(COMBO_PAGES_DIR) if os.path.isfile(os.path.join(COMBO_PAGES_DIR, f))]
 
-        ic(dir_contents)
+        # ic(dir_contents)
 
         # print(f'pdf_toolbox;list_pdf_dir:dir_contents: {dir_contents}')
 
@@ -452,6 +452,9 @@ class PdfToolbox:
             # print(f'pdf_t:merge_files:pdf: {pdf}')
             merger.append(pdf)
 
-        # print(f"{COMBO_INFILES_DIR}/{o_file}")
-        merger.write(f"{COMBO_INFILES_DIR}/{o_file}")
+        # target = f"{COMBO_INFILES_DIR}/{o_file}"
+        target = f"{o_file}"
+        # ic(o_file)
+        ic(target)
+        merger.write(target)
         merger.close()

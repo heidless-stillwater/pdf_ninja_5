@@ -18,14 +18,25 @@ COMBO_SORT_DIR = f'{COMBO_DIR}/sort_files'
 COMBO_OUTPUT_DIR = f'{COMBO_DIR}/combo_output'
 COMBO_COMBO_DIR = f'{COMBO_DIR}/combo_images'
 
-COMBO_ICON_WIDTH = 160
-DASHBOARD_NUM_COLS = 6
+COMBO_ICON_WIDTH = 80
+SUPPORT_COMBO_ICON_WIDTH = 200
+DASHBOARD_NUM_COLS = 8
 DASHBOARD_HEIGHT = 5
+SUPPORT_NUM_COLS = 1
+SUPPORT_HEIGHT = 5
+
+SCROLLFRAME_WIDTH = 400
+SCROLLFRAME_HEIGHT = 500
+
+SUPPORT_SCROLLFRAME_WIDTH = 260
+SUPPORT_SCROLLFRAME_HEIGHT = 500
 
 DIR_IMG = 'assets/images/icons8-folder-48.png'
 LIST_IMG = 'assets/images/icons8-pdf-48.png'
 
 LARGEFONT = ("Verdana", 35)
+TITLE_FONT = ('helvetica', 20, 'bold')
+HEADING_FONT = ('helvetica', 12, 'bold')
 
 
 # PDF_NINJA_LOGO = 'C:\Users\heidless\PycharmProjects\pdf_ninja_5\assets-old\RRecipe_logo.png'

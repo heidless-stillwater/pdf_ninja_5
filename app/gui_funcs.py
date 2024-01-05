@@ -42,7 +42,7 @@ def combo_infiles_refresh(self):
 def combo_infiles_listing(self):
     listing = self.pdf_t.combo_infiles_listing()
     # print(f'combo_infiles_listing:listing: {listing}')
-    self.display_listing(listing)
+    self.support_display_listing(listing)
     return listing
 
 
