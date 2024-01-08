@@ -15,6 +15,6 @@ self.combo_filename_entry.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky
 self.button_merge_pages = ttk.Button(
     master=self.combo_filename_entry_frame,
     text='Build Combo',
-    command=self.build_combo_all
+    command=self.buildComboAll
 )
 self.button_merge_pages.grid(row=2, column=0, padx=(5, 5), pady=(5, 5))

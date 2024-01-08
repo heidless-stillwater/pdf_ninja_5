@@ -1,20 +1,17 @@
 import tkinter as tk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
-from ttkbootstrap.toast import ToastNotification
-from ttkbootstrap.tableview import Tableview
 from ttkbootstrap.scrolled import ScrolledFrame
 from ttkbootstrap.scrolled import ScrolledText
 
 from tkinter import filedialog as fd
 
 # from dashboard import *
-from support import *
 
 from pdf_toolbox import PdfToolbox
 from get_combo_dialog import GetComboDialog
 
-import random
+import logging_utils_2 as pn_log
 import pathlib
 from pdf2image import convert_from_path
 from PIL import Image, ImageTk
@@ -31,6 +28,7 @@ from constants import *
 class PdfNinja(ttk.Frame):
     root_dir = os.getcwd()
     # ic(root_dir)
+
     def __init__(self, master_window):
         super().__init__(master_window, padding=(0, 0))
         # self.pack(fill=BOTH, expand=YES)
@@ -61,16 +59,18 @@ class PdfNinja(ttk.Frame):
         self.app_mgr_container.columnconfigure(0, weight=1)
         self.app_mgr_container.columnconfigure(1, weight=1)
 
-        self.app_mgr_create()
+        self.appMgrCreate()
 
-        self.nj_dashboard_create()
+        self.njDashboardCreate()
 
-        self.nj_support_create()
+        self.njSupportCreate()
 
         # self.page_switch_to_support()
-        self.page_switch_to_dashboard()
+        self.pageSwitchToDashboard()
 
-    def app_mgr_create(self):
+    @pn_log.pn_logger
+    # @pn_log.pn_timer
+    def appMgrCreate(self) -> None:
         # ic('in app mgr create')
         self.app_mgr_sidebar = ttk.Frame(
             master=self.app_mgr_container,
@@ -84,10 +84,12 @@ class PdfNinja(ttk.Frame):
         self.app_mgr_sidebar.rowconfigure(0, weight=1)
         self.app_mgr_sidebar.rowconfigure(1, weight=1)
         #
-        self.app_mgr_create_branding()
-        self.app_mgr_create_controls()
+        self.appNgrCreateBranding()
+        self.appMgrControls()
 
-    def app_mgr_create_branding(self):
+    @pn_log.pn_logger
+    # @pn_log.pn_timer
+    def appNgrCreateBranding(self) -> None:
         self.branding_container = ttk.Frame(
             master=self.app_mgr_sidebar,
             width=300,
@@ -96,9 +98,11 @@ class PdfNinja(ttk.Frame):
         )
         self.branding_container.grid(row=0, column=0, padx=(5, 5), pady=(5, 5), sticky='')
 
-        self.app_mgr_logo()
+        self.appMgrLogo()
 
-    def app_mgr_logo(self):
+    @pn_log.pn_logger
+    # @pn_log.pn_timer
+    def appMgrLogo(self) -> None:
         # logo
         # sz_h = int(sz_w * 1.41)
 
@@ -121,7 +125,9 @@ class PdfNinja(ttk.Frame):
         self.logo_widget.image = logo_img
         self.logo_widget.grid(row=0, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), ipady=0, sticky='n')
 
-    def app_mgr_create_controls(self):
+    @pn_log.pn_logger
+    # @pn_log.pn_timer
+    def appMgrControls(self) -> None:
         self.app_mgr_controls = ttk.Frame(
             master=self.app_mgr_sidebar,
             # width=600,
@@ -135,9 +141,11 @@ class PdfNinja(ttk.Frame):
         self.app_mgr_controls.rowconfigure(1, weight=1)
         self.app_mgr_controls.rowconfigure(2, weight=1)
 
-        self.app_mgr_create_buttonbox()
+        self.appMgrButtonbox()
 
-    def app_mgr_create_buttonbox(self):
+    @pn_log.pn_logger
+    # @pn_log.pn_timer
+    def appMgrButtonbox(self) -> None:
         self.button_container = ttk.Frame(
             self.app_mgr_controls,
             width=200,
@@ -155,7 +163,7 @@ class PdfNinja(ttk.Frame):
         switch_to_dashboard_btn = ttk.Button(
             master=self.button_container,
             text='Dashboard',
-            command=self.page_switch_to_dashboard,
+            command=self.pageSwitchToDashboard,
             # style=DANGER,
             # width=15
         )
@@ -164,7 +172,7 @@ class PdfNinja(ttk.Frame):
         switch_to_dashboard_btn = ttk.Button(
             master=self.button_container,
             text='Support',
-            command=self.page_switch_to_support,
+            command=self.pageSwitchToSupport,
             style=PRIMARY,
             width=15
         )
@@ -173,7 +181,7 @@ class PdfNinja(ttk.Frame):
         cancel_btn = ttk.Button(
             master=self.button_container,
             text='Remove ALL pdf_files',
-            command=self.pdf_files_remove_all,
+            command=self.pdfFilesRemoveAll,
             style=WARNING,
             width=20
         )
@@ -191,19 +199,15 @@ class PdfNinja(ttk.Frame):
         cancel_btn_2 = ttk.Button(
             master=self.button_container,
             text='Cancel',
-            command=self.app_mgr_on_cancel,
+            command=self.appMgrOnCancel,
             style=DANGER,
             width=6
         )
         cancel_btn_2.grid(row=4, column=0, rowspan=1, padx=(5, 5), pady=(100, 5), sticky='nsew')
 
-    def page_switch_to_dashboard(self):
-        self.nj_supp_0.grid_forget()
-        self.nj_dash_0.grid(row=0, column=1, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='')
-        self.nj_dash_0.tkraise()
-
-    def pdf_files_remove_all(self):
-        ic('in pdf_files_remove_all')
+    @pn_log.pn_logger
+    # @pn_log.pn_timer
+    def pdfFilesRemoveAll(self) -> None:
         home_dir = os.getcwd()
         # ic(home_dir)
 
@@ -214,11 +218,11 @@ class PdfNinja(ttk.Frame):
         this_dir = os.getcwd()
         # ic(this_dir)
 
-        listing = self.dir_files(this_dir)
-        # ic(listing)
+        listing = self.dirFiles(this_dir)
+        ic(type(listing), listing)
         os.chdir(home_dir)
 
-        self.unlink_files(listing)
+        self.unlinkFiles(listing)
 
         # pdf pages
         # ic(PDF_PAGES_DIR)
@@ -227,11 +231,11 @@ class PdfNinja(ttk.Frame):
         this_dir = os.getcwd()
         # ic(this_dir)
 
-        listing = self.dir_files(this_dir)
+        listing = self.dirFiles(this_dir)
         # ic(listing)
         os.chdir(home_dir)
 
-        self.unlink_files(listing)
+        self.unlinkFiles(listing)
 
 
         # combo infiles
@@ -241,11 +245,11 @@ class PdfNinja(ttk.Frame):
         this_dir = os.getcwd()
         # ic(this_dir)
 
-        listing = self.dir_files(this_dir)
+        listing = self.dirFiles(this_dir)
         # ic(listing)
         os.chdir(home_dir)
 
-        self.unlink_files(listing)
+        self.unlinkFiles(listing)
 
 
         # combo pages
@@ -255,12 +259,12 @@ class PdfNinja(ttk.Frame):
         this_dir = os.getcwd()
         # ic(this_dir)
 
-        listing = self.dir_files(this_dir)
+        listing = self.dirFiles(this_dir)
         # ic('pdf_files_remove_all:', listing)
 
         os.chdir(home_dir)
 
-        self.unlink_files(listing)
+        self.unlinkFiles(listing)
 
         # combo images
         # ic(COMBO_IMAGES_DIR)
@@ -269,27 +273,33 @@ class PdfNinja(ttk.Frame):
         this_dir = os.getcwd()
         # ic(this_dir)
 
-        listing = self.dir_files(this_dir)
+        listing = self.dirFiles(this_dir)
         # ic(listing)
         os.chdir(home_dir)
 
-        self.unlink_files(listing)
+        self.unlinkFiles(listing)
 
-        self.nj_support_main_window()
+        self.njSupportMainWindow()
         # ic('calling dashboard_combo_pages_images_refresh')
-        self.nj_dashboard_main_frame()
+        self.njDashboardMainFrame()
         # self.nj_dashboard_create()
 
-    def pdf_files_remove(self, listing):
-        ic(listing)
-        self.unlink_files(listing)
+    @pn_log.pn_logger
+    # @pn_log.pn_timer
+    def pdfFilesRemove(self, listing: list) -> None:
+        ic(listing, type(listing))
+        self.unlinkFiles(listing)
 
-    def unlink_files(self, listing):
+    @pn_log.pn_logger
+    # @pn_log.pn_timer
+    def unlinkFiles(self, listing:list) -> None:
         for i in listing:
             # ic('deleting:', i)
             i.unlink()
 
-    def dir_files(self, dir_path):
+    @pn_log.pn_logger
+    # @pn_log.pn_timer
+    def dirFiles(self, dir_path: str) -> list:
         # import pathlib
 
         # folder path
@@ -308,12 +318,16 @@ class PdfNinja(ttk.Frame):
                 res.append(entry)
         return(res)
 
-    def page_switch_to_dashboard(self):
+    @pn_log.pn_logger
+    # @pn_log.pn_timer
+    def pageSwitchToDashboard(self) -> None:
         self.nj_supp_0.grid_forget()
         self.nj_dash_0.grid(row=0, column=1, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='')
         self.nj_dash_0.tkraise()
 
-    def page_switch_to_support(self):
+    @pn_log.pn_logger
+    # @pn_log.pn_timer
+    def pageSwitchToSupport(self) -> None:
         # ic('in page_switch_to_support')
         self.nj_dash_0.grid_forget()
         self.nj_supp_0.grid(row=0, column=1, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='')
@@ -323,7 +337,8 @@ class PdfNinja(ttk.Frame):
     # SUPPORT
     ######################
 
-    def nj_support_create(self):
+    @pn_log.pn_timer
+    def njSupportCreate(self):
         self.nj_supp_0 = ttk.Frame(
             self.app_mgr_container,
             width=500,
@@ -332,41 +347,43 @@ class PdfNinja(ttk.Frame):
         )
         self.nj_supp_0.grid(row=0, column=1, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='')
 
-        self.nj_support_header()
-        self.nj_support_top_bar()
-        self.nj_support_main_window()
-        self.nj_support_bottom_bar()
+        self.njSupportHeader()
+        self.njSupportTopBar()
+        self.njSupportMainWindow()
+        self.njSupportBottomBar()
         #
         # ###########################
         # refresh listings
 
         # infiles
-        self.support_combo_infiles_refresh()
+        self.supportComboInfilesRefresh()
 
         # pages
-        self.support_combo_pages_refresh()
+        self.supportComboPagesRefresh()
 
         # pages images
-        self.support_combo_pages_images_refresh()
+        self.supportComboPagesImagesRefresh()
 
-    def nj_support_header(self):
-        self.nj_support_header = ttk.Frame(
+    # @pn_log.pn_timer
+    def njSupportHeader(self):
+        self.njSupportHeader = ttk.Frame(
             master=self.nj_supp_0,
             width=200,
             height=500,
             # style=PRIMARY,
         )
-        self.nj_support_header.grid(row=0, column=0, rowspan=1, columnspan=1, padx=(5, 5), pady=(5, 5), sticky='')
+        self.njSupportHeader.grid(row=0, column=0, rowspan=1, columnspan=1, padx=(5, 5), pady=(5, 5), sticky='')
 
         self.nj_support_header_lbl = ttk.Label(
-            master=self.nj_support_header,
+            master=self.njSupportHeader,
             text='Support - master',
             font=TITLE_FONT,
             style=LIGHT,
         )
         self.nj_support_header_lbl.grid(row=0, column=0, rowspan=1, columnspan=1, padx=(5, 5), pady=(5, 5), sticky='')
 
-    def nj_support_top_bar(self):
+    # @pn_log.pn_timer
+    def njSupportTopBar(self):
         self.pn_supp_top_bar = ttk.Frame(
             master=self.nj_supp_0,
             # width=500,
@@ -394,7 +411,7 @@ class PdfNinja(ttk.Frame):
             text='Load PDF File - TST',
             style=PRIMARY,
             cursor='hand2',
-            command=lambda: self.load_pdf_file(),
+            command=lambda: self.loadPdfFile(),
         )
         button_0.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -403,7 +420,7 @@ class PdfNinja(ttk.Frame):
             text='Generate PDF Pages',
             style=PRIMARY,
             cursor='hand2',
-            command=lambda: self.gen_pdf_pages_from_all_infiles(),
+            command=lambda: self.genPdfPagesFromAllInfiles(),
         )
         button_1.grid(row=1, column=1, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -412,7 +429,7 @@ class PdfNinja(ttk.Frame):
             text='Generate Combo Infiles',
             style=PRIMARY,
             cursor='hand2',
-            command=lambda: self.build_combo_all(),
+            command=lambda: self.buildComboAll(),
         )
         button_2.grid(row=1, column=2, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -421,7 +438,7 @@ class PdfNinja(ttk.Frame):
             text='Generate Combo Pages',
             style=PRIMARY,
             cursor='hand2',
-            command=lambda: self.gen_combo_pages_from_combo_pages(),
+            command=lambda: self.genComboPagesFromComboPages(),
         )
         button_3.grid(row=1, column=3, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -430,7 +447,7 @@ class PdfNinja(ttk.Frame):
             text='Generate Combo Images',
             style=PRIMARY,
             cursor='hand2',
-            command=lambda: self.generate_combo_pages_images(),
+            command=lambda: self.generateComboPagesImages(),
         )
         button_4.grid(row=1, column=4, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -439,11 +456,12 @@ class PdfNinja(ttk.Frame):
             text='Full Wash Cycle - Support',
             # style=DANGER,
             cursor='hand2',
-            command=lambda: self.full_wash_cycle_support(),
+            command=lambda: self.supportFullWashCycle(),
         )
         button_5.grid(row=1, column=5, padx=(5, 5), pady=(5, 5), sticky='')
 
-    def nj_support_main_window(self):
+    # @pn_log.pn_timer
+    def njSupportMainWindow(self):
         # ic('in nj_support_main_window')
         self.nj_support_main = ttk.Frame(
             master=self.nj_supp_0,
@@ -490,9 +508,10 @@ class PdfNinja(ttk.Frame):
         self.nj_support_scroll_combo_images.columnconfigure(1, weight=1)
         # self.nj_support_main.rowconfigure(0, weight=1)
 
-        self.nj_support_scroll_combo_pages_images_switches = []
+        self.nj_support_scroll_combo_images_switches = []
 
-    def nj_support_bottom_bar(self):
+    # @pn_log.pn_timer
+    def njSupportBottomBar(self):
         # pdf_ninja
         self.pn_supp_bottom_bar = ttk.Frame(
             master=self.nj_supp_0,
@@ -516,7 +535,7 @@ class PdfNinja(ttk.Frame):
             text='Gen COMBO Infiles',
             style=PRIMARY,
             cursor='hand2',
-            command=lambda: self.dummy_func(),
+            command=lambda: self.dummyFunc(),
         )
         supp_bottom_btn_0.grid(row=0, column=0, padx=(10, 5), pady=(5, 5), sticky='')
 
@@ -525,7 +544,7 @@ class PdfNinja(ttk.Frame):
             text='Gen COMBO Pages',
             style=PRIMARY,
             cursor='hand2',
-            command=lambda: self.gen_combo_pages_from_combo_pages(),
+            command=lambda: self.genComboPagesFromComboPages(),
         )
         supp_bottom_btn_1.grid(row=0, column=1, padx=(10, 5), pady=(5, 5), sticky='')
 
@@ -534,7 +553,7 @@ class PdfNinja(ttk.Frame):
             text='Gen COMBO Pages Images',
             style=PRIMARY,
             cursor='hand2',
-            command=lambda: self.generate_combo_pages_images(),
+            command=lambda: self.generateComboPagesImages(),
         )
         supp_bottom_btn_2.grid(row=0, column=2, padx=(10, 5), pady=(5, 5), sticky='')
 
@@ -543,7 +562,7 @@ class PdfNinja(ttk.Frame):
             text='Combo INFILES Refresh',
             style=PRIMARY,
             cursor='hand2',
-            command=lambda: self.support_combo_infiles_refresh(),
+            command=lambda: self.supportComboInfilesRefresh(),
         )
         refresh_combo_infiles_btn.grid(row=1, column=1, padx=(10, 5), pady=(5, 5), sticky='')
 
@@ -552,7 +571,7 @@ class PdfNinja(ttk.Frame):
             text='Combo PAGES Refresh',
             style=PRIMARY,
             cursor='hand2',
-            command=lambda: self.support_combo_pages_refresh(),
+            command=lambda: self.supportComboPagesRefresh(),
         )
         refresh_combo_pages_btn.grid(row=1, column=0, padx=(10, 5), pady=(5, 5), sticky='')
 
@@ -566,7 +585,8 @@ class PdfNinja(ttk.Frame):
         )
         self.support_info_txt.grid(row=0, column=3, rowspan=2, padx=(10, 5), pady=(5, 5), sticky='')
 
-    def support_combo_infiles_refresh(self):
+    # @pn_log.pn_timer
+    def supportComboInfilesRefresh(self):
         # ic(f'support_combo_infiles_refresh')
 
         self.combo_sort_infiles_listing_frame_switches = []
@@ -580,7 +600,7 @@ class PdfNinja(ttk.Frame):
         )
         title_infiles.grid(row=row, column=0, padx=(125, 0), pady=(0, 0), sticky='W')
 
-        combo_infiles_lst = self.combo_infiles_listing()
+        combo_infiles_lst = self.comboInfilesListing()
         # ic(combo_infiles_lst)
 
         row += 1
@@ -598,7 +618,8 @@ class PdfNinja(ttk.Frame):
 
         return combo_infiles_lst
 
-    def support_combo_pages_refresh(self):
+    # @pn_log.pn_timer
+    def supportComboPagesRefresh(self):
         # ic('in support_combo_pages_refresh')
         self.combo_pages_listing_frame_switches = []
 
@@ -613,7 +634,7 @@ class PdfNinja(ttk.Frame):
         title_combo_pages.grid(row=row, column=0, padx=(125, 0), pady=(0, 0), sticky='E')
         # ic('support_combo_pages_refresh - start')
 
-        combo_lst = self.get_combo_pages_listing()
+        combo_lst = self.getComboPagesListing()
         # ic('support_combo_pages_refresh', combo_lst)
 
         row += 1
@@ -630,16 +651,17 @@ class PdfNinja(ttk.Frame):
 
         return combo_lst
 
-    def support_combo_pages_images_refresh(self):
+    @pn_log.pn_timer
+    def supportComboPagesImagesRefresh(self):
         # ic('in support_combo_pages_images_refresh')
-        combo_lst = self.get_combo_pages_images_listing()
+        combo_lst = self.getComboPagesImagesListing()
         # ic(f'combo_pages_images_refresh: {combo_lst}')
 
         ##############################
 
         ##############################
 
-        self.combo_pages_images_listing_frame_switches = []
+        self.nj_support_scroll_combo_images_switches = []
 
         row = 0
         support_combo_images = ttk.Label(
@@ -697,7 +719,7 @@ class PdfNinja(ttk.Frame):
                 variable=switch_initial_state,
             )
             switch_name.grid(row=1, column=0, padx=(5, 5), pady=(5, 10), sticky='')
-            self.combo_pages_images_listing_frame_switches.append(switch_name)
+            self.nj_support_scroll_combo_images_switches.append(switch_name)
 
             # test_pages_image_label = ttk.Label(
             #     master=combo_pages_image_frame,
@@ -717,15 +739,15 @@ class PdfNinja(ttk.Frame):
                 # width=100,
                 text=combo,
                 compound='top',
-                # style=LIGHT,
+                style=LIGHT,
             )
             combo_pages_image_label.image = photo_img
             combo_pages_image_label.grid(row=0, column=0, padx=(0, 0), pady=(5, 5))
 
             col_index += 1
 
-
-    def support_display_listing(self, lst):
+    # @pn_log.pn_timer
+    def supportDisplayListing(self, lst):
         # print(f'display_pdf_listing:lst: {lst}')
         out_txt = ''
         for f in lst:
@@ -741,7 +763,8 @@ class PdfNinja(ttk.Frame):
     # DASHBOARD
     ######################
 
-    def nj_dashboard_create(self):
+    # @pn_log.pn_timer
+    def njDashboardCreate(self):
         self.nj_dash_0 = ttk.Frame(
             self.app_mgr_container,
             width=800,
@@ -750,12 +773,13 @@ class PdfNinja(ttk.Frame):
         )
         self.nj_dash_0.grid(row=0, column=1, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='')
 
-        self.nj_dashboard_header()
-        self.nj_dashboard_top_bar()
-        self.nj_dashboard_main_frame()
-        self.nj_dashboard_bottom_bar()
+        self.njDashboardHeader()
+        self.njDashboardTopBar()
+        self.njDashboardMainFrame()
+        self.njDashboardBottomBar()
 
-    def nj_dashboard_header(self):
+    # @pn_log.pn_timer
+    def njDashboardHeader(self):
         self.nj_dashboard_header = ttk.Frame(
             master=self.nj_dash_0,
             width=200,
@@ -772,7 +796,8 @@ class PdfNinja(ttk.Frame):
         )
         self.nj_dashboard_header_lbl.grid(row=0, column=0, rowspan=1, columnspan=1, padx=(5, 5), pady=(5, 5), sticky='')
 
-    def nj_dashboard_top_bar(self):
+    # @pn_log.pn_timer
+    def njDashboardTopBar(self):
         self.pn_top_bar = ttk.Frame(
             master=self.nj_dash_0,
             # width=500,
@@ -794,6 +819,25 @@ class PdfNinja(ttk.Frame):
             # style=DARK
         )
         self.dashboard_operations.grid(row=1, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), sticky='')
+
+        dash_get_selection_btn = ttk.Button(
+            master=self.dashboard_operations,
+            text='Get Selection - DASH',
+            # style=DANGER,
+            cursor='hand2',
+            command=lambda: self.dashGetImageSelection(),
+        )
+        dash_get_selection_btn.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky='')
+
+        dash_full_was_cycle_btn = ttk.Button(
+            master=self.dashboard_operations,
+            text='Full Wash Cycle - DASH',
+            # style=DANGER,
+            cursor='hand2',
+            command=lambda: self.fullWashCycle(),
+        )
+        dash_full_was_cycle_btn.grid(row=1, column=1, padx=(5, 5), pady=(5, 5), sticky='')
+
         #
         # button_0 = ttk.Button(
         #     master=self.dashboard_operations,
@@ -840,16 +884,8 @@ class PdfNinja(ttk.Frame):
         # )
         # button_4.grid(row=1, column=4, padx=(5, 5), pady=(5, 5), sticky='')
 
-        button_5 = ttk.Button(
-            master=self.dashboard_operations,
-            text='Full Wash Cycle - DashBoard',
-            # style=DANGER,
-            cursor='hand2',
-            command=lambda: self.full_wash_cycle(),
-        )
-        button_5.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky='')
-
-    def nj_dashboard_main_frame(self):
+    # @pn_log.pn_timer
+    def njDashboardMainFrame(self):
         self.nj_dashboard_main = ttk.Frame(
             master=self.nj_dash_0,
             # width=200,
@@ -870,8 +906,9 @@ class PdfNinja(ttk.Frame):
             # style=SECONDARY,
         )
         self.nj_dashboard_scroll_pages.grid(row=0, column=0, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='nsew')
+        self.nj_dashboard_scroll_pages_switches = []
 
-        self.dashboard_combo_pages_images_refresh()
+        self.dashboardComboPagesImagesRefresh()
 
         #
         # self.test_button = ttk.Button(
@@ -880,7 +917,8 @@ class PdfNinja(ttk.Frame):
         # )
         # self.test_button.grid(row=1, column=1, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='nsew')
 
-    def nj_dashboard_bottom_bar(self):
+    # @pn_log.pn_timer
+    def njDashboardBottomBar(self):
         # pdf_ninja
         self.pn_bottom_bar = ttk.Frame(
             master=self.nj_dash_0,
@@ -907,15 +945,24 @@ class PdfNinja(ttk.Frame):
         )
         self.bottom_lbl_0.grid(row=0, column=0, columnspan=6, padx=(10, 5), pady=(5, 5), sticky='')
 
-    def dashboard_combo_pages_images_refresh(self):
+    # @pn_log.pn_timer
+    def dashboardComboPagesImagesRefresh(self):
         row = 0
         col_index = 0
-        combo_lst = self.get_combo_pages_images_listing()
+        combo_lst = self.getComboPagesImagesListing()
+        self.dash_switches = []
+
+        # self.dashGetImageSelection()
+
         # ic(f'dashboard_combo_pages_images_refresh: {combo_lst}')
 
-        self.combo_pages_images_listing_frame_switches = []
+        # self.combo_pages_images_listing_frame_switches = []
+
+        # self.nj_dashboard_scroll_pages_switches = []
+
 
         for combo in combo_lst:
+            switch_index = 0
             # ic(row, col_index)
             if col_index >= DASHBOARD_NUM_COLS:
                 col_index = 0
@@ -938,6 +985,7 @@ class PdfNinja(ttk.Frame):
             # ic(row, col_index)
 
             sz_w = COMBO_ICON_WIDTH
+            # sz_w = 500
             sz_h = int(sz_w * 1.41)
             icon_img = Image.open(f'{COMBO_IMAGES_DIR}/{combo}').resize((sz_w, sz_h))
             img_path = f'{COMBO_IMAGES_DIR}/{combo}'
@@ -947,28 +995,6 @@ class PdfNinja(ttk.Frame):
 
             icon_img = Image.open(img_path).resize((sz_w, sz_h))
             photo_img = ImageTk.PhotoImage(icon_img)
-
-            switch_initial_state = ttk.IntVar(value=1)
-            switch_name = ttk.Checkbutton(
-                master=combo_pages_image_frame,
-                # width=50,
-                # height=50,
-                style=WARNING,
-                variable=switch_initial_state,
-            )
-            switch_name.grid(row=1, column=0, padx=(5, 5), pady=(5, 10), sticky='')
-            self.combo_pages_images_listing_frame_switches.append(switch_name)
-
-            # test_pages_image_label = ttk.Label(
-            #     master=combo_pages_image_frame,
-            #     # image=photo_img,
-            #     # font='helvetica 18 bold',
-            #     # width=100,
-            #     text='TESTER',
-            #     # compound='top',
-            #     style=LIGHT,
-            # )
-            # test_pages_image_label.grid(row=0, column=0, padx=(0, 0), pady=(5, 5))
 
             combo_pages_image_label = ttk.Label(
                 master=combo_pages_image_frame,
@@ -982,40 +1008,203 @@ class PdfNinja(ttk.Frame):
             combo_pages_image_label.image = photo_img
             combo_pages_image_label.grid(row=0, column=0, padx=(0, 0), pady=(5, 5))
 
-            col_index += 1
+            switchStateVariable = ttk.BooleanVar()
+            check_button = ttk.Checkbutton(
+                master=combo_pages_image_frame,
+                # width=50,
+                # height=50,
+                style=WARNING,
+                variable=switchStateVariable,
+                # command=self.checkbutton_clicked
+            )
+            check_button.grid(row=1, column=0, padx=(5, 5), pady=(5, 10), sticky='')
+            self.nj_dashboard_scroll_pages_switches.append(check_button)
+            self.dash_switches.append(check_button)
 
-    def get_combo_pages_images_listing(self):
+            # self.dashGetImageSelection()
+
+            col_index += 1
+    #
+    # def checkbutton_clicked(obj):
+    #     print("New state:", obj.switchStateVariable.get())
+
+    # @pn_log.pn_timer
+    def dashGetImageSelection(self):
+        ic('in dash_get_image_selection')
+
+        # switches = self.dash_switches
+
+        switches = [tk.BooleanVar() for i in self.dash_switches]
+
+        ic(self.dash_switches)
+        switch_variable = ttk.BooleanVar()
+
+        for i, switch in enumerate(switches):
+            ic(i, switch.get(), switch)
+
+        chks = [tk.BooleanVar() for i in self.nj_dashboard_scroll_pages_switches]
+        # ic(chks)
+
+        # self.switchStateVariable.get()
+
+        # self.switchStateVariable
+        # lst = [l[i] for i, chk in enumerate(chks) if chk.get()]
+        # lst = [chks[i] for i, chk in enumerate(chks) if self.switchStateVariable.get()]
+
+        lst = [chks[i] for i, chk in enumerate(chks) if chk.get()]
+        # ic(lst)
+
+        # print("New state:", obj.switchStateVariable.get())
+
+        #
+        # for i, switch in enumerate(self.nj_dashboard_scroll_pages_switches):
+        #     ssV = switch.get()
+        #     ic(i, ssV)
+        #
+        #     sw = self.nj_dashboard_scroll_pages_switches[i]
+        #     ic(sw)
+
+    ############################
+        #
+        # ic(list(map(func, li)))
+        # ic(map(func, li))
+        #
+        # # comprehension example
+        # ic([func(x) for x in li if x % 2 == 0])
+        #
+############################
+        #
+        # # self.nj_dashboard_scroll_pages_switches.append(switch_name)
+        #
+        # # orig_switches = self.nj_dashboard_scroll_pages_switches
+        # # ic(orig_switches.get())
+        #
+        # #
+        # # new_switches = [tk.BooleanVar() for i in orig_switches]
+        # # ic(new_switches)
+        #
+        # def on_click():
+        #     lst = [l[i] for i, chk in enumerate(chks) if chk.get()]
+        #     print(",".join(lst))
+        #
+        # l = ["apple", "ball", "cat", "dog"]
+        #
+        # chks = [tk.BooleanVar() for i in l]
+        #
+        # for i, s in enumerate(l):
+        #     tk.Checkbutton(window, text=s, variable=chks[i]).pack(anchor=tk.W)
+        #
+        # tk.Button(window, text="submit", command=on_click).pack()
+
+###################
+
+        # ic(lst)
+
+        # ic(len(self.nj_dashboard_scroll_pages_switches))
+
+
+
+        #
+        # def getVal(s):
+        #     switchStateVariable = ttk.BooleanVar(s.get())
+        #     return switchStateVariable
+        #
+        # ic(list(map(getVal, chks)))
+
+        #
+        # ic(list(
+        #     map(
+        #         self.switchStateVariable.get(),
+        #         chks))
+        #     )
+        # )
+
+        #
+        # for i, val in enumerate(chks):
+        #     ic(i, val)
+        #     is_selected = self.nj_dashboard_scroll_pages_switches[i].get()
+        #     ic(is_selected)
+        # #
+        # selection = []
+        # for i in enumerate(pdf_pages_listing):
+        #     is_selected = 1
+        #     # is_selected = self.page_listing_frame_switches[i].get()
+        #
+        #     # ic(is_selected)
+        #     # print(f'get_page_selection:is_selected: {is_selected} :: file: {listing[i]}')
+        #     if is_selected == 1:
+        #         selection.append(pdf_pages_listing[i[0]])
+        # # ic(selection)
+        # return selection
+        #
+
+
+
+
+
+        # chks = [tk.BooleanVar() for i in self.nj_dashboard_scroll_pages_switches]
+
+        # ic(list(lambda x: ic(x), map(ic, chks)))
+
+        #
+        # ic(list(map(func, li)))
+        # ic(map(func, li))
+        #
+        #
+        # # comprehension example
+        # ic([func(x) for x in li if x % 2 == 0])
+
+
+
+
+
+        # ic(lambda chks[x]: for x in chks))
+        #
+        # f1 = lambda x: chks[x]
+        # ic(f1(0))
+
+        # ic(lambda x: ic('val:', val)) for val in enumerate(chks)))
+
+
+    # @pn_log.pn_timer
+    def getComboPagesImagesListing(self):
         listing = self.pdf_t.list_combo_images_dir()
         # print(f'XXXX:get_combo_pages_listing: {listing}')
         # self.display_listing(listing)
         return listing
+    #
+    # def get_combo_pages_images_listing(self):
+    #     listing = self.pdf_t.list_combo_images_dir()
+    #     # print(f'XXXX:get_combo_pages_listing: {listing}')
+    #     # self.display_listing(listing)
+    #     return listing
 
     ########## END DASHBOARD #############
 
     ##################################
     # General Service Funcs
-    def full_wash_cycle(self):
+    @pn_log.pn_timer
+    def fullWashCycle(self):
         """ fully process a pdf file - both DASHBOARD & SUPPORT"""
         # print(f'\nfull_wash_cycle')
-        self.load_pdf_file()
+        self.loadPdfFile()
 
         # print(f'full_wash_cycle:gen pdf pages')
-        self.gen_pdf_pages_from_all_infiles()
+        self.genPdfPagesFromAllInfiles()
 
         # print(f'full_wash_cycle: building combo')
-        self.build_combo_all()
+        self.buildComboAll()
 
         # print(f'full_wash_cycle: building combo pages')
-        self.gen_combo_pages_from_combo_pages()
+        self.genComboPagesFromComboPages()
 
         # print(f'full_wash_cycle: building combo pages images')
-        self.generate_combo_pages_images()
+        self.generateComboPagesImages()
 
-        self.combo_pages_images_refresh_support()
-
-        self.support_combo_infiles_refresh()
-        self.support_combo_pages_refresh()
-        self.support_combo_pages_images_refresh()
+        self.comboPagesImagesRefreshSupport()
+        self.supportComboInfilesRefresh()
+        self.supportComboPagesRefresh()
+        self.supportComboPagesImagesRefresh()
 
         # combo_pages_listing = self.get_combo_pages_listing()
         # combo_pages_in_dir = COMBO_PAGES_DIR
@@ -1024,22 +1213,23 @@ class PdfNinja(ttk.Frame):
         # refreshing dnd listing
         # self.combo_sort_refresh()
 
-    def full_wash_cycle_support(self):
+    @pn_log.pn_timer
+    def supportFullWashCycle(self):
         """ fully process a pdf file - both DASHBOARD & SUPPORT"""
         # print(f'\nfull_wash_cycle')
-        self.load_pdf_file()
+        self.loadPdfFile()
 
         # print(f'full_wash_cycle:gen pdf pages')
-        self.gen_pdf_pages_from_all_infiles()
+        self.genPdfPagesFromAllInfiles()
 
         # print(f'full_wash_cycle: building combo')
-        self.build_combo_all()
+        self.buildComboAll()
 
         # print(f'full_wash_cycle: building combo pages')
-        self.gen_combo_pages_from_combo_pages()
+        self.genComboPagesFromComboPages()
 
         # print(f'full_wash_cycle: building combo pages images')
-        self.generate_combo_pages_images()
+        self.generateComboPagesImages()
 
         # combo_pages_listing = self.get_combo_pages_listing()
         # combo_pages_in_dir = COMBO_PAGES_DIR
@@ -1048,22 +1238,25 @@ class PdfNinja(ttk.Frame):
         # refreshing dnd listing
         # self.combo_sort_refresh()
 
-        self.support_combo_infiles_refresh()
-        self.support_combo_pages_refresh()
-        self.support_combo_pages_images_refresh()
+        self.supportComboInfilesRefresh()
+        self.supportComboPagesRefresh()
+        self.supportComboPagesImagesRefresh()
 
-    def open_get_combo_dialog(self):
+    @pn_log.pn_timer
+    def openGetComboDialog(self):
         """ pop up data input example """
-        getComboDialog = GetComboDialog(self.refresh_combo_name)
+        getComboDialog = GetComboDialog(self.refreshComboName)
 
-    def refresh_combo_name(self, combo_name):
+    @pn_log.pn_timer
+    def refreshComboName(self, combo_name):
         """ REDUNDANT? """
         # ic('update function from main window...')
         self.current_combo_name = combo_name.get()
         # ic(self.current_combo_name)
         self.bottom_lbl_0.configure(text=f'Current Combo: {self.current_combo_name}')
 
-    def get_combo_name_input(self):
+    @pn_log.pn_timer
+    def getComboNameInput(self):
         """ contains Label & Entry Box"""
         self.current_combo_name = ''
 
@@ -1105,7 +1298,8 @@ class PdfNinja(ttk.Frame):
 
         return self.current_combo_name
 
-    def build_combo_all(self):
+    @pn_log.pn_timer
+    def buildComboAll(self):
         """
             relies on self.combo_filename_entry.get() :: is that called?
         """
@@ -1137,7 +1331,7 @@ class PdfNinja(ttk.Frame):
             if len(outfile) == 0:
                 ic(f'No Pages Selected...')
             else:
-                selection = self.get_page_all_selected(outfile_global)
+                selection = self.getPageAllSelected(outfile_global)
                 # print(f'build_combo_all:selection: {selection}')
                 self.pdf_t.merge_files(selection, outfile)
 
@@ -1148,7 +1342,8 @@ class PdfNinja(ttk.Frame):
 
         # self.combo_refresh()
 
-    def get_page_all_selected(self, pattern):
+    # @pn_log.pn_timer
+    def getPageAllSelected(self, pattern):
         # ic('in get_page_all_selected')
         pdf_pages_listing = self.pdf_t.list_pages_dir(pattern)
         # ic(pattern, pdf_pages_listing)
@@ -1167,12 +1362,14 @@ class PdfNinja(ttk.Frame):
         # ic(selection)
         return selection
 
-    def combo_infiles_listing(self):
+    # @pn_log.pn_timer
+    def comboInfilesListing(self):
         listing = self.pdf_t.combo_infiles_listing()
         # print(f'combo_infiles_listing:listing: {listing}')
         # self.display_listing(listing)
         return listing
 
+    # @pn_log.pn_timer
     def combo_infiles_listing_PROTO(self):
         listing = self.pdf_t.combo_infiles_listing()
         # ic(listing)
@@ -1184,17 +1381,19 @@ class PdfNinja(ttk.Frame):
         # self.display_listing(listing)
         return listing
 
-    def get_combo_pages_listing(self):
+    # @pn_log.pn_timer
+    def getComboPagesListing(self):
         listing = self.pdf_t.list_combo_pages_dir()
         # print(f'XXXX:get_combo_pages_listing: {listing}')
         # ic(listing)
         # self.display_listing(listing)
         return listing
 
-    def combo_pages_images_refresh(self):
+    # @pn_log.pn_timer
+    def comboPagesImagesRefresh(self):
         row = 0
         col_index = 0
-        combo_lst = self.get_combo_pages_images_listing()
+        combo_lst = self.getComboPagesImagesListing()
         # ic(f'combo_pages_images_refresh: {combo_lst}')
 
         ##############################
@@ -1273,11 +1472,11 @@ class PdfNinja(ttk.Frame):
 
             col_index += 1
 
-    def combo_pages_images_refresh_support(self):
-
+    @pn_log.pn_timer
+    def comboPagesImagesRefreshSupport(self):
         row = 0
         col_index = 0
-        combo_lst = self.get_combo_pages_images_listing()
+        combo_lst = self.getComboPagesImagesListing()
         # ic(f'combo_pages_images_refresh: {combo_lst}')
 
         ##############################
@@ -1356,15 +1555,10 @@ class PdfNinja(ttk.Frame):
 
             col_index += 1
 
-    def get_combo_pages_images_listing(self):
-        listing = self.pdf_t.list_combo_images_dir()
-        # print(f'XXXX:get_combo_pages_listing: {listing}')
-        # self.display_listing(listing)
-        return listing
-
-    def generate_combo_pages_images(self):
+    @pn_log.pn_timer
+    def generateComboPagesImages(self):
         # REDUNDANT
-        c_lst = self.get_combo_pages_listing()
+        c_lst = self.getComboPagesListing()
         # ic(f'c_lst: {c_lst}')
 
         # define out images
@@ -1397,10 +1591,11 @@ class PdfNinja(ttk.Frame):
 
                         img[i].save(save_file, 'PNG')
 
-        self.combo_pages_images_refresh()
-        self.combo_pages_images_refresh_support()
+        self.comboPagesImagesRefresh()
+        self.comboPagesImagesRefreshSupport()
 
-    def gen_combo_pages_from_combo_pages(self):
+    @pn_log.pn_timer
+    def genComboPagesFromComboPages(self):
         # ic('gen_combo_pages_from_combo_pages')
         # converts ALL infiles
         # ic(f'gen_combo_pages_from_combo')
@@ -1449,10 +1644,11 @@ class PdfNinja(ttk.Frame):
             )
 
             # print(f'gen_combo_pages_from_combo: calling combo_images_refresh')
-            self.support_combo_pages_refresh()
+            self.supportComboPagesRefresh()
             # self.combo_images_refresh()
 
-    def load_pdf_file(self):
+    @pn_log.pn_timer
+    def loadPdfFile(self):
         # self.refresh_f_listings()
         # ic(f'in load_PDF_file')
 
@@ -1503,9 +1699,10 @@ class PdfNinja(ttk.Frame):
 
         # self.refresh_pdf_infiles_listing()
 
-    def refresh_pdf_infiles_listing(self):
+    # @pn_log.pn_timer
+    def refreshPdfInfilesListing(self):
         row = 0
-        pdf_infiles_list = self.pdf_infiles_listing()
+        pdf_infiles_list = self.pdfInfilesListing()
 
         # pdf_infiles_listing
         # print(f's_lst: {s_lst}')
@@ -1516,19 +1713,21 @@ class PdfNinja(ttk.Frame):
             self.file_list_scrollable_frame_switches.append(switch_name)
         # print(f'switches: {self.f_scrollable_frame_switches}')
 
-    def pdf_infiles_listing(self):
+    # @pn_log.pn_timer
+    def pdfInfilesListing(self):
         listing = self.pdf_t.pdf_infiles_listing()
         # print(f'pdf_infiles_listing:listing: {listing}')
         # self.display_listing(listing)
         return listing
 
-    def gen_pdf_pages_from_all_infiles(self):
+    # @pn_log.pn_timer
+    def genPdfPagesFromAllInfiles(self):
         # ic(f'\nXXX:gen_pdf_pages_from_all_infiles')
 
         # get selection
         row = 0
 
-        pdf_infiles_list = self.pdf_infiles_listing()
+        pdf_infiles_list = self.pdfInfilesListing()
         # ic(pdf_infiles_list)
 
         selection = []
@@ -1567,8 +1766,10 @@ class PdfNinja(ttk.Frame):
 
             # self.pdf_pages_refresh()
 
-    def app_mgr_on_cancel(self):
+    @pn_log.pn_timer
+    def appMgrOnCancel(self):
         self.quit()
 
-    def dummy_func(self):
+    # @pn_log.pn_timer
+    def dummyFunc(self):
         ic('in dummy_func()')

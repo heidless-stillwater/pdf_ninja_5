@@ -4,14 +4,13 @@ from typing import Union
 from icecream import ic
 
 # logging.basicConfig(level = logging.DEBUG)
-logger = logging.getLogger()
-
+logging.basicConfig(level = logging.INFO)
+# logger = logging.getLogger()
 
 class MyLogger:
     def __init__(self):
         ic('in MyLogger')
         logging.basicConfig(filename='./app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
-        # logging.basicConfig(level=logging.DEBUG)
 
     def get_logger(self, name=None):
         return logging.getLogger(name)

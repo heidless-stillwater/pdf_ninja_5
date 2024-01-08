@@ -19,3 +19,5 @@ def show_frame(self, cont):
     frame = self.frames[cont]
     frame.tkraise()
 
+
+dash_get_image_selection

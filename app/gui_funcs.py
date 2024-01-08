@@ -10,7 +10,7 @@ def combo_infiles_refresh(self):
     # self.combo_sort_listing_frame_switches = []
     row = 0
 
-    combo_infiles_lst = self.combo_infiles_listing()
+    combo_infiles_lst = self.comboInfilesListing()
 
     #
     # # print(f'combo_infiles_refresh:combo_infiles_lst: {combo_infiles_lst}')
@@ -40,9 +40,9 @@ def combo_infiles_refresh(self):
 
 
 def combo_infiles_listing(self):
-    listing = self.pdf_t.combo_infiles_listing()
+    listing = self.pdf_t.comboInfilesListing()
     # print(f'combo_infiles_listing:listing: {listing}')
-    self.support_display_listing(listing)
+    self.supportDisplayListing(listing)
     return listing
 
 

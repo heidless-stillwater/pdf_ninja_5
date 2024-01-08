@@ -5,3 +5,6 @@
 
 [Deploying Python applications
 ](https://packaging.python.org/en/latest/discussions/deploying-python-applications/)
+
+[Python CheatSheets](https://k0nze.gumroad.com/)
+

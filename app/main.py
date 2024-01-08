@@ -1,5 +1,6 @@
 import ttkbootstrap as ttk
 from gui_utils import PdfNinja
+
 import os
 from icecream import ic
 from PIL import Image, ImageTk

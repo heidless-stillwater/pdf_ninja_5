@@ -16,23 +16,23 @@ def nj_dashboard_create(self):
     )
     self.nj_dash_0.grid(row=0, column=1, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='')
 
-    self.nj_dashboard_header()
-    self.nj_dashboard_top_bar()
+    self.njDashboardHeader()
+    self.njDashboardTopBar()
     self.nj_dashboard_main()
-    self.nj_dashboard_bottom_bar()
+    self.njDashboardBottomBar()
 
 
 def nj_dashboard_header(self):
-    self.nj_dashboard_header = ttk.Frame(
+    self.njDashboardHeader = ttk.Frame(
         master=self.nj_dash_0,
         width=200,
         height=500,
         # style=PRIMARY,
     )
-    self.nj_dashboard_header.grid(row=0, column=0, rowspan=1, columnspan=1, padx=(5, 5), pady=(5, 5), sticky='')
+    self.njDashboardHeader.grid(row=0, column=0, rowspan=1, columnspan=1, padx=(5, 5), pady=(5, 5), sticky='')
 
     self.nj_dashboard_header_lbl = ttk.Label(
-        master=self.nj_dashboard_header,
+        master=self.njDashboardHeader,
         text='DashBoard',
         font=TITLE_FONT,
         style=LIGHT,
@@ -68,7 +68,7 @@ def nj_dashboard_top_bar(self):
         text='Load PDF File - TST',
         style=PRIMARY,
         cursor='hand2',
-        command=lambda: self.load_pdf_file(),
+        command=lambda: self.loadPdfFile(),
     )
     button_0.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -77,7 +77,7 @@ def nj_dashboard_top_bar(self):
         text='Generate PDF Pages',
         style=PRIMARY,
         cursor='hand2',
-        command=lambda: self.gen_pdf_pages_from_all_infiles(),
+        command=lambda: self.genPdfPagesFromAllInfiles(),
     )
     button_1.grid(row=1, column=1, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -86,7 +86,7 @@ def nj_dashboard_top_bar(self):
         text='Generate Combo Infiles',
         style=PRIMARY,
         cursor='hand2',
-        command=lambda: self.build_combo_all(),
+        command=lambda: self.buildComboAll(),
     )
     button_2.grid(row=1, column=2, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -95,7 +95,7 @@ def nj_dashboard_top_bar(self):
         text='Generate Combo Pages',
         style=PRIMARY,
         cursor='hand2',
-        command=lambda: self.gen_combo_pages_from_combo_pages(),
+        command=lambda: self.genComboPagesFromComboPages(),
     )
     button_3.grid(row=1, column=3, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -104,7 +104,7 @@ def nj_dashboard_top_bar(self):
         text='Generate Combo Images',
         style=PRIMARY,
         cursor='hand2',
-        command=lambda: self.generate_combo_pages_images(),
+        command=lambda: self.generateComboPagesImages(),
     )
     button_4.grid(row=1, column=4, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -113,7 +113,7 @@ def nj_dashboard_top_bar(self):
         text='Full Wash Cycle',
         style=DANGER,
         cursor='hand2',
-        command=lambda: self.full_wash_cycle(),
+        command=lambda: self.fullWashCycle(),
     )
     button_5.grid(row=1, column=5, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -146,7 +146,7 @@ def nj_dashboard_top_bar(self):
         text='Load PDF File - TST',
         style=PRIMARY,
         cursor='hand2',
-        command=lambda: self.load_pdf_file(),
+        command=lambda: self.loadPdfFile(),
     )
     button_0.grid(row=1, column=0, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -155,7 +155,7 @@ def nj_dashboard_top_bar(self):
         text='Generate PDF Pages',
         style=PRIMARY,
         cursor='hand2',
-        command=lambda: self.gen_pdf_pages_from_all_infiles(),
+        command=lambda: self.genPdfPagesFromAllInfiles(),
     )
     button_1.grid(row=1, column=1, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -164,7 +164,7 @@ def nj_dashboard_top_bar(self):
         text='Generate Combo Infiles',
         style=PRIMARY,
         cursor='hand2',
-        command=lambda: self.build_combo_all(),
+        command=lambda: self.buildComboAll(),
     )
     button_2.grid(row=1, column=2, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -173,7 +173,7 @@ def nj_dashboard_top_bar(self):
         text='Generate Combo Pages',
         style=PRIMARY,
         cursor='hand2',
-        command=lambda: self.gen_combo_pages_from_combo_pages(),
+        command=lambda: self.genComboPagesFromComboPages(),
     )
     button_3.grid(row=1, column=3, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -182,7 +182,7 @@ def nj_dashboard_top_bar(self):
         text='Generate Combo Images',
         style=PRIMARY,
         cursor='hand2',
-        command=lambda: self.generate_combo_pages_images(),
+        command=lambda: self.generateComboPagesImages(),
     )
     button_4.grid(row=1, column=4, padx=(5, 5), pady=(5, 5), sticky='')
 
@@ -191,26 +191,26 @@ def nj_dashboard_top_bar(self):
         text='Full Wash Cycle',
         style=DANGER,
         cursor='hand2',
-        command=lambda: self.full_wash_cycle(),
+        command=lambda: self.fullWashCycle(),
     )
     button_5.grid(row=1, column=5, padx=(5, 5), pady=(5, 5), sticky='')
 
 
 def full_wash_cycle(self):
     # print(f'\nfull_wash_cycle')
-    self.load_pdf_file()
+    self.loadPdfFile()
 
     # print(f'full_wash_cycle:gen pdf pages')
-    self.gen_pdf_pages_from_all_infiles()
+    self.genPdfPagesFromAllInfiles()
 
     # print(f'full_wash_cycle: building combo')
-    self.build_combo_all()
+    self.buildComboAll()
 
     # print(f'full_wash_cycle: building combo pages')
-    self.gen_combo_pages_from_combo_pages()
+    self.genComboPagesFromComboPages()
 
     # print(f'full_wash_cycle: building combo pages images')
-    self.generate_combo_pages_images()
+    self.generateComboPagesImages()
 
     # combo_pages_listing = self.get_combo_pages_listing()
     # combo_pages_in_dir = COMBO_PAGES_DIR
@@ -242,7 +242,7 @@ def nj_dashboard_main(self):
     )
     self.nj_dashboard_scroll_pages.grid(row=0, column=0, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='nsew')
 
-    self.combo_pages_images_refresh()
+    self.comboPagesImagesRefresh()
 
     #
     # self.test_button = ttk.Button(
@@ -288,7 +288,7 @@ def nj_dashboard_bottom_bar(self):
     self.button_merge_pages = ttk.Button(
         master=self.combo_filename_entry_frame,
         text='Build Combo',
-        command=self.build_combo_all
+        command=self.buildComboAll
     )
     self.button_merge_pages.grid(row=2, column=0, padx=(5, 5), pady=(5, 5))
 
@@ -305,7 +305,7 @@ def nj_dashboard_bottom_bar(self):
         text='Merge Final Pages',
         style=PRIMARY,
         cursor='hand2',
-        command=lambda: self.dummy_func(),
+        command=lambda: self.dummyFunc(),
     )
     bottom_btn_0.grid(row=0, column=2, padx=(10, 5), pady=(5, 5), sticky='')
 
@@ -314,7 +314,7 @@ def nj_dashboard_bottom_bar(self):
         text='Build Combo',
         style=PRIMARY,
         cursor='hand2',
-        command=lambda: self.dummy_func(),
+        command=lambda: self.dummyFunc(),
     )
     bottom_btn_1.grid(row=0, column=3, padx=(10, 5), pady=(5, 5), sticky='')
 
@@ -323,6 +323,6 @@ def nj_dashboard_bottom_bar(self):
         text='POPUP: get combo name',
         style=DANGER,
         cursor='hand2',
-        command=lambda: self.open_get_combo_dialog(),
+        command=lambda: self.openGetComboDialog(),
     )
     bottom_btn_2.grid(row=0, column=4, padx=(10, 5), pady=(5, 5), sticky='')
