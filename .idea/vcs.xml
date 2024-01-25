@@ -4,5 +4,6 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/code_snippets" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/reference/code_snippets" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/seaborn_datasets/seaborn-data" vcs="Git" />
   </component>
 </project>
