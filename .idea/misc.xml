@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Black">
-    <option name="sdkName" value="ttkbootstrap-conda (2)" />
+    <option name="sdkName" value="pdf_ninja_interpreter" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="ttkbootstrap-conda (2)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="pdf_ninja_interpreter" project-jdk-type="Python SDK" />
 </project>

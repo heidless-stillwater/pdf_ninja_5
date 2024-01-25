@@ -18,6 +18,8 @@ class PdfToolbox:
 
     def list_pdf_dir(self):
         # print(f'in PdfToolbox.list_pdf_dir')
+        print(f'in list_pdf_dir: {os.getcwd()}')
+        print(f'PDF_INFILES: {PDF_INFILES}')
 
         # ignore directories
         dir_contents = [f for f in os.listdir(PDF_INFILES) if os.path.isfile(os.path.join(PDF_INFILES, f))]

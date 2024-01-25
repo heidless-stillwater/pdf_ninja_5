@@ -68,7 +68,7 @@ class PdfNinja(ttk.Frame):
         # self.page_switch_to_support()
         self.pageSwitchToDashboard()
 
-    @pn_log.pn_logger
+    #@pn_log.pn_logger
     # @pn_log.pn_timer
     def appMgrCreate(self) -> None:
         # ic('in app mgr create')
@@ -87,7 +87,7 @@ class PdfNinja(ttk.Frame):
         self.appNgrCreateBranding()
         self.appMgrControls()
 
-    @pn_log.pn_logger
+    #@pn_log.pn_logger
     # @pn_log.pn_timer
     def appNgrCreateBranding(self) -> None:
         self.branding_container = ttk.Frame(
@@ -100,7 +100,7 @@ class PdfNinja(ttk.Frame):
 
         self.appMgrLogo()
 
-    @pn_log.pn_logger
+    #@pn_log.pn_logger
     # @pn_log.pn_timer
     def appMgrLogo(self) -> None:
         # logo
@@ -125,7 +125,7 @@ class PdfNinja(ttk.Frame):
         self.logo_widget.image = logo_img
         self.logo_widget.grid(row=0, column=0, rowspan=1, padx=(5, 5), pady=(5, 5), ipady=0, sticky='n')
 
-    @pn_log.pn_logger
+    #@pn_log.pn_logger
     # @pn_log.pn_timer
     def appMgrControls(self) -> None:
         self.app_mgr_controls = ttk.Frame(
@@ -143,7 +143,7 @@ class PdfNinja(ttk.Frame):
 
         self.appMgrButtonbox()
 
-    @pn_log.pn_logger
+    #@pn_log.pn_logger
     # @pn_log.pn_timer
     def appMgrButtonbox(self) -> None:
         self.button_container = ttk.Frame(
@@ -205,7 +205,7 @@ class PdfNinja(ttk.Frame):
         )
         cancel_btn_2.grid(row=4, column=0, rowspan=1, padx=(5, 5), pady=(100, 5), sticky='nsew')
 
-    @pn_log.pn_logger
+    #@pn_log.pn_logger
     # @pn_log.pn_timer
     def pdfFilesRemoveAll(self) -> None:
         home_dir = os.getcwd()
@@ -284,20 +284,20 @@ class PdfNinja(ttk.Frame):
         self.njDashboardMainFrame()
         # self.nj_dashboard_create()
 
-    @pn_log.pn_logger
+    #@pn_log.pn_logger
     # @pn_log.pn_timer
     def pdfFilesRemove(self, listing: list) -> None:
         ic(listing, type(listing))
         self.unlinkFiles(listing)
 
-    @pn_log.pn_logger
+    #@pn_log.pn_logger
     # @pn_log.pn_timer
     def unlinkFiles(self, listing:list) -> None:
         for i in listing:
             # ic('deleting:', i)
             i.unlink()
 
-    @pn_log.pn_logger
+    #@pn_log.pn_logger
     # @pn_log.pn_timer
     def dirFiles(self, dir_path: str) -> list:
         # import pathlib
@@ -318,14 +318,14 @@ class PdfNinja(ttk.Frame):
                 res.append(entry)
         return(res)
 
-    @pn_log.pn_logger
+    #@pn_log.pn_logger
     # @pn_log.pn_timer
     def pageSwitchToDashboard(self) -> None:
         self.nj_supp_0.grid_forget()
         self.nj_dash_0.grid(row=0, column=1, rowspan=1, padx=(10, 10), pady=(10, 10), sticky='')
         self.nj_dash_0.tkraise()
 
-    @pn_log.pn_logger
+    #@pn_log.pn_logger
     # @pn_log.pn_timer
     def pageSwitchToSupport(self) -> None:
         # ic('in page_switch_to_support')
@@ -337,7 +337,7 @@ class PdfNinja(ttk.Frame):
     # SUPPORT
     ######################
 
-    @pn_log.pn_timer
+    #@pn_log.pn_timer
     def njSupportCreate(self):
         self.nj_supp_0 = ttk.Frame(
             self.app_mgr_container,

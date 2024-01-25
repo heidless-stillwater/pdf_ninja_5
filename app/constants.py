@@ -1,15 +1,15 @@
 
 
-PDF_NINJA_LOGO = 'assets/RRecipe_logo.png'
+PDF_NINJA_LOGO = '../assets/RRecipe_logo.png'
 
 PDF_FILES = f'./pdf_files'
 
-PDF_INFILES = f'app/pdf_files/pdf_infiles'
-PAGES_DIR = f'app/pdf_files/pdf_pages'
-PDF_PAGES_DIR = f'app//pdf_files/pdf_pages'
-COMBO_INFILES_DIR = f'app/pdf_files/pdf_combo/combo_infiles'
-COMBO_PAGES_DIR = f'app/pdf_files/pdf_combo/combo_pages'
-COMBO_IMAGES_DIR = f'app/pdf_files/pdf_combo/combo_images'
+PDF_INFILES = f'./pdf_files/pdf_infiles'
+PAGES_DIR = f'./pdf_files/pdf_pages'
+PDF_PAGES_DIR = f'./pdf_files/pdf_pages'
+COMBO_INFILES_DIR = f'./pdf_files/pdf_combo/combo_infiles'
+COMBO_PAGES_DIR = f'./pdf_files/pdf_combo/combo_pages'
+COMBO_IMAGES_DIR = f'./pdf_files/pdf_combo/combo_images'
 
 IMAGES_DIR = f'./pdf_files/pdf_images'
 COMBO_DIR = f'./pdf_files/pdf_combo'

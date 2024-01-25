@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/code_snippets" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/reference/code_snippets" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/seaborn_datasets/seaborn-data" vcs="Git" />
+    <mapping directory="" vcs="Git" />
   </component>
 </project>

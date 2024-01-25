@@ -10,7 +10,7 @@ logging.basicConfig(level = logging.INFO)
 class MyLogger:
     def __init__(self):
         ic('in MyLogger')
-        logging.basicConfig(filename='./app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
+        logging.basicConfig(filename='./pdf_ninja.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
 
     def get_logger(self, name=None):
         return logging.getLogger(name)
